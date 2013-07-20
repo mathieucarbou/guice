@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.mycila</groupId>
+        <artifactId>pom</artifactId>
+        <version>6-SNAPSHOT</version>
+        <relativePath>../pom</relativePath>
+    </parent>
+
+    <groupId>com.mycila.guice.extensions</groupId>
+    <artifactId>mycila-guice-extensions</artifactId>
+    <version>3.0.rc1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Mycila Guice Extensions</name>
+    <url>https://github.com/mycila/guice</url>
+    <inceptionYear>2010</inceptionYear>
+
+    <scm>
+        <connection>scm:git:git@github.com:mycila/guice.git</connection>
+        <developerConnection>scm:git:git@github.com:mycila/guice.git</developerConnection>
+        <url>http://github.com/mycila/guice</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <modules>
+        <module>extensions/injection</module>
+        <module>extensions/jsr-250</module>
+        <module>extensions/service</module>
+        <module>extensions/web</module>
+    </modules>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
