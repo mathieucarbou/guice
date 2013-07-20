@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.jsr250;
+package com.mycila.guice.ext.injection;
 
-import com.google.inject.TypeLiteral;
-import com.mycila.inject.injector.MethodHandlerSkeleton;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
-import javax.annotation.PreDestroy;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-
-/**
- * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- */
-final class Jsr250PreDestroyHandler extends MethodHandlerSkeleton<PreDestroy> {
-    @Override
-    public <T> void handle(TypeLiteral<? extends T> type, T instance, Method method, PreDestroy annotation) {
-        if (!Modifier.isStatic(method.getModifiers()))
-            super.handle(type, instance, method, annotation);
-    }
+public interface FieldHandler<A extends Annotation> extends MemberHandler<A, Field> {
 }

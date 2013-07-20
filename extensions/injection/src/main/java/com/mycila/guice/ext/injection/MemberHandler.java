@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.jsr250;
+package com.mycila.guice.ext.injection;
 
-/**
- * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- */
-public interface Jsr250Destroyer {
-    void preDestroy();
+import com.google.inject.TypeLiteral;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Member;
+
+public interface MemberHandler<A extends Annotation, M extends Member & AnnotatedElement> {
+    void handle(TypeLiteral<?> type, Object instance, M member, A annotation);
 }

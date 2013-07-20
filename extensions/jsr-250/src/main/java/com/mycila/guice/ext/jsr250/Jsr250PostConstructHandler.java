@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.jsr250;
+package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
+import com.mycila.guice.ext.injection.MethodHandler;
 import com.mycila.inject.MycilaGuiceException;
-import com.mycila.inject.injector.MethodHandlerSkeleton;
 import com.mycila.inject.internal.Proxy;
 import com.mycila.inject.internal.Reflect;
 
@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250PostConstructHandler extends MethodHandlerSkeleton<PostConstruct> {
+final class Jsr250PostConstructHandler implements MethodHandler<PostConstruct> {
 
     @Inject
     Provider<Injector> injector;

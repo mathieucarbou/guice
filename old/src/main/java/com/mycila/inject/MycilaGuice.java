@@ -20,7 +20,7 @@ import com.google.inject.*;
 import com.google.inject.matcher.AbstractMatcher;
 import com.google.inject.matcher.Matcher;
 import com.google.inject.matcher.Matchers;
-import com.mycila.inject.injector.*;
+import com.mycila.guice.ext.injection.*;
 import com.mycila.inject.scope.*;
 import net.sf.cglib.core.Signature;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -87,25 +87,7 @@ public final class MycilaGuice {
         return requestInjection(new ResetSingleton());
     }
 
-    public <A extends Annotation> MycilaGuice bindAnnotationInjector(Class<A> annotationType, Class<? extends KeyProvider<A>> providerClass) {
-        binder.bindListener(Matchers.any(), requestInjection(new MemberInjectorTypeListener<A>(annotationType, providerClass)));
-        return this;
-    }
 
-    public <A extends Annotation> MycilaGuice handleMethodAfterInjection(Class<A> annotationType, Class<? extends MethodHandler<A>> providerClass) {
-        binder.bindListener(Matchers.any(), requestInjection(new MethodHandlerTypeListener<A>(annotationType, providerClass)));
-        return this;
-    }
-
-    public <A extends Annotation> MycilaGuice handleFieldAfterInjection(Class<A> annotationType, Class<? extends FieldHandler<A>> providerClass) {
-        binder.bindListener(Matchers.any(), requestInjection(new FieldHandlerTypeListener<A>(annotationType, providerClass)));
-        return this;
-    }
-
-    public <A extends Annotation> MycilaGuice handleAfterInjection(Class<A> annotationType, Class<? extends AnnotatedMemberHandler<A>> providerClass) {
-        binder.bindListener(Matchers.any(), requestInjection(new AnnotatedMemberHandlerTypeListener<A>(annotationType, providerClass)));
-        return this;
-    }
 
     public <T> MycilaGuice bind(Class<T> type, T instance) {
         binder.bind(type).toInstance(requestInjection(instance));

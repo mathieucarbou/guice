@@ -21,8 +21,8 @@ import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.util.Modules;
-import com.mycila.inject.jsr250.Jsr250;
-import com.mycila.inject.jsr250.Jsr250Injector;
+import com.mycila.guice.ext.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250Injector;
 import com.mycila.inject.service.ServiceModules;
 
 import javax.servlet.ServletContextEvent;

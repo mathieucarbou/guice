@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.injection;
 
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
-import com.mycila.inject.MycilaGuice;
-import com.mycila.inject.internal.Reflect;
+import com.google.inject.internal.Annotations;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -34,14 +33,14 @@ public abstract class KeyProviderSkeleton<A extends Annotation> implements KeyPr
     @Override
     public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, A resourceAnnotation) {
         for (Annotation annotation : injectedMember.getAnnotations())
-            if (MycilaGuice.isBindingAnnotation(annotation.annotationType()))
+            if (Annotations.isBindingAnnotation(annotation.annotationType()))
                 return Key.get(injectedType.getFieldType(injectedMember), annotation);
         return Key.get(injectedType.getFieldType(injectedMember));
     }
 
     @Override
     public List<Key<?>> getParameterKeys(TypeLiteral<?> injectedType, Method injectedMember, A resourceAnnotation) {
-        return Reflect.getParameterKeys(injectedType, injectedMember);
+        return TypeInfo.of(injectedType).getParameterKeys(injectedType, injectedMember);
     }
 
 }

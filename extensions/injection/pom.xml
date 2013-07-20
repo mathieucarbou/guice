@@ -6,15 +6,34 @@
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
         <version>3.0.rc1-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>injection</artifactId>
     <name>Mycila Guice Extensions :: Injection</name>
     <packaging>jar</packaging>
-    
+
+    <properties>
+        <osgi.private>com.mycila.internal</osgi.private>
+        <osgi.import>*</osgi.import>
+        <osgi.export>!com.mycila.internal*,com.mycila*;version="${project.version}";-noimport:=true</osgi.export>
+    </properties>
+
     <dependencies>
-        
+        <dependency>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit-dep</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

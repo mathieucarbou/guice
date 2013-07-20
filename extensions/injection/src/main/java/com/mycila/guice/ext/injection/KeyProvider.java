@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.injection;
+
+import com.google.inject.Key;
+import com.google.inject.TypeLiteral;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
 
-public interface FieldHandler<A extends Annotation> extends MemberHandler<A, Field> {
+/**
+ * @author Mathieu Carbou (mathieu.carbou@gmail.com)
+ */
+public interface KeyProvider<A extends Annotation> {
+    Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, A resourceAnnotation);
+
+    List<Key<?>> getParameterKeys(TypeLiteral<?> injectedType, Method injectedMember, A resourceAnnotation);
 }

@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.jsr250;
+package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
-import com.google.inject.name.Names;
-import com.mycila.inject.injector.KeyProviderSkeleton;
+import com.mycila.guice.ext.injection.MethodHandler;
 
-import javax.annotation.Resource;
-import java.lang.reflect.Field;
+import javax.annotation.PreDestroy;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
+final class Jsr250PreDestroyHandler implements MethodHandler<PreDestroy> {
     @Override
-    public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, Resource resourceAnnotation) {
-        String name = resourceAnnotation.name();
-        return name.length() == 0 ?
-                super.getKey(injectedType, injectedMember, resourceAnnotation) :
-                Key.get(injectedType.getFieldType(injectedMember), Names.named(name));
+    public <T> void handle(TypeLiteral<? extends T> type, T instance, Method method, PreDestroy annotation) {
+        if (!Modifier.isStatic(method.getModifiers())) {
+            try {
+                Proxy.invoker(method).invoke(instance);
+            } catch (Exception e) {
+                throw MycilaGuiceException.runtime(e);
+            }
+        }
     }
 }

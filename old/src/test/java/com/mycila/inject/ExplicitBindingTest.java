@@ -18,8 +18,8 @@ package com.mycila.inject;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Stage;
-import com.mycila.inject.jsr250.Jsr250;
-import com.mycila.inject.jsr250.Jsr250Injector;
+import com.mycila.guice.ext.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250Injector;
 import org.junit.Test;
 
 public class ExplicitBindingTest {

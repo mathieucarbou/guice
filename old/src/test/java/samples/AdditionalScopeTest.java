@@ -17,8 +17,8 @@
 package samples;
 
 import com.google.inject.AbstractModule;
-import com.mycila.inject.jsr250.Jsr250;
-import com.mycila.inject.jsr250.Jsr250Injector;
+import com.mycila.guice.ext.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250Injector;
 import com.mycila.inject.scope.ExtraScopeModule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

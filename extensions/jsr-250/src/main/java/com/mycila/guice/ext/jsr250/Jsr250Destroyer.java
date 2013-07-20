@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.jsr250;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-
-public interface MethodHandler<A extends Annotation> extends MemberHandler<A, Method> {
+/**
+ * @author Mathieu Carbou (mathieu.carbou@gmail.com)
+ */
+public interface Jsr250Destroyer {
+    void destroy();
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.injection;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Provider;
@@ -26,9 +26,6 @@ import com.google.inject.spi.TypeListener;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
-
-import static com.mycila.inject.internal.Reflect.annotatedBy;
-import static com.mycila.inject.internal.Reflect.findFields;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -45,7 +42,7 @@ public final class FieldHandlerTypeListener<A extends Annotation> implements Typ
     @Override
     public <I> void hear(final TypeLiteral<I> type, TypeEncounter<I> encounter) {
         final Provider<? extends FieldHandler<A>> provider = encounter.getProvider(handlerClass);
-        final List<Field> fields = Lists.newLinkedList(findFields(type.getRawType(), annotatedBy(annotationType)));
+        final List<Field> fields = Lists.newLinkedList(TypeInfo.of(type).findAllAnnotatedFields(annotationType));
         if (!fields.isEmpty()) {
             encounter.register(new InjectionListener<I>() {
                 @Override

@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.injection;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.MembersInjector;
@@ -31,11 +30,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.mycila.inject.MycilaGuiceException.runtime;
-import static com.mycila.inject.internal.Reflect.annotatedBy;
-import static com.mycila.inject.internal.Reflect.findFields;
-import static com.mycila.inject.internal.Reflect.findMethods;
+import static com.google.common.collect.Lists.newLinkedList;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -54,8 +49,8 @@ public final class MemberInjectorTypeListener<A extends Annotation> implements T
     public <I> void hear(final TypeLiteral<I> injectableType, TypeEncounter<I> encounter) {
         final Provider<? extends KeyProvider<A>> provider = encounter.getProvider(providerClass);
         final Provider<Injector> injectorProvider = encounter.getProvider(Injector.class);
-        final List<Field> fields = Lists.newLinkedList(findFields(injectableType.getRawType(), annotatedBy(annotationType)));
-        final List<Method> methods = Lists.newLinkedList(filter(findMethods(injectableType.getRawType()), annotatedBy(annotationType)));
+        final List<Field> fields = newLinkedList(TypeInfo.of(injectableType).findAllAnnotatedFields(annotationType));
+        final List<Method> methods = newLinkedList(TypeInfo.of(injectableType).findAllAnnotatedMethods(annotationType));
         if (!fields.isEmpty() || !methods.isEmpty()) {
             encounter.register(new MembersInjector<I>() {
                 @Override

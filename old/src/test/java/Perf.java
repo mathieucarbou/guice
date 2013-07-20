@@ -17,7 +17,7 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
-import com.mycila.inject.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250;
 
 import javax.annotation.PostConstruct;
 

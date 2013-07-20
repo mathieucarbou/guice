@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.injection;
 
 import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
@@ -26,11 +26,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.newLinkedList;
 import static com.google.common.collect.Lists.reverse;
-import static com.mycila.inject.internal.Reflect.annotatedBy;
-import static com.mycila.inject.internal.Reflect.findMethods;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -47,7 +44,7 @@ public final class MethodHandlerTypeListener<A extends Annotation> implements Ty
     @Override
     public <I> void hear(final TypeLiteral<I> type, TypeEncounter<I> encounter) {
         final Provider<? extends MethodHandler<A>> provider = encounter.getProvider(handlerClass);
-        final List<Method> methods = reverse(newLinkedList(filter(findMethods(type.getRawType()), annotatedBy(annotationType))));
+        final List<Method> methods = reverse(newLinkedList(TypeInfo.of(type).findAllAnnotatedMethods(annotationType)));
         if (!methods.isEmpty()) {
             encounter.register(new InjectionListener<I>() {
                 @Override

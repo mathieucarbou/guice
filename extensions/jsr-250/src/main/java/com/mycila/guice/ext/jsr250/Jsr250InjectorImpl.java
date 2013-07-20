@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.jsr250;
+package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.Binding;
 import com.google.inject.Inject;
@@ -43,18 +43,17 @@ final class Jsr250InjectorImpl implements Jsr250Injector {
     private volatile Injector injector;
 
     @Override
-    public synchronized void destroy() {
+    public synchronized void close() {
         if (!closed && injector != null) {
             closed = true;
             Injector current = injector;
             injector = null;
-            current.getInstance(Jsr250Destroyer.class).preDestroy();
+            current.getInstance(Jsr250Destroyer.class).destroy();
         }
     }
 
     private Injector injector() {
-        if (closed || injector == null)
-            throw new IllegalStateException("Injector closed !");
+        if (closed || injector == null) throw new IllegalStateException("Injector closed !");
         return injector;
     }
 

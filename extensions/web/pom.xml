@@ -6,7 +6,7 @@
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
         <version>3.0.rc1-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>web</artifactId>

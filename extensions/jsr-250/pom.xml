@@ -6,15 +6,24 @@
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
         <version>3.0.rc1-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>jsr-250</artifactId>
     <name>Mycila Guice Extensions :: JSR-250</name>
     <packaging>jar</packaging>
-    
+
     <dependencies>
-        
+        <dependency>
+            <groupId>com.mycila.guice.extensions</groupId>
+            <artifactId>injection</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit-dep</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

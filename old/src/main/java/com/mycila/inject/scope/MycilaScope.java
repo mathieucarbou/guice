@@ -19,7 +19,7 @@ package com.mycila.inject.scope;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Scope;
-import com.mycila.inject.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250;
 
 abstract class MycilaScope implements Scope {
     boolean hasJSR250Module;

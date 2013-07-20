@@ -19,7 +19,7 @@ package com.mycila.inject.scope;
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.mycila.inject.annotation.Jsr250Singleton;
-import com.mycila.inject.jsr250.Jsr250;
+import com.mycila.guice.ext.jsr250.Jsr250;
 
 import javax.annotation.PreDestroy;
 import java.util.HashMap;

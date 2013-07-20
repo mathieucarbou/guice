@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package com.mycila.inject.injector;
+package com.mycila.guice.ext.jsr250;
 
+import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
-import com.mycila.inject.MycilaGuiceException;
-import com.mycila.inject.internal.Proxy;
+import com.google.inject.name.Names;
+import com.mycila.guice.ext.injection.KeyProviderSkeleton;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import javax.annotation.Resource;
+import java.lang.reflect.Field;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public abstract class MethodHandlerSkeleton<A extends Annotation> implements MethodHandler<A> {
+final class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
     @Override
-    public <T> void handle(TypeLiteral<? extends T> type, T instance, Method method, A annotation) {
-        try {
-            Proxy.invoker(method).invoke(instance);
-        } catch (Exception e) {
-            throw MycilaGuiceException.runtime(e);
-        }
+    public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, Resource resourceAnnotation) {
+        String name = resourceAnnotation.name();
+        return name.length() == 0 ?
+                super.getKey(injectedType, injectedMember, resourceAnnotation) :
+                Key.get(injectedType.getFieldType(injectedMember), Names.named(name));
     }
 }
