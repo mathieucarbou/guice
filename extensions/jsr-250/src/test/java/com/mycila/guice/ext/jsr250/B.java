@@ -16,15 +16,8 @@
 
 package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.Injector;
+public interface B {
+    public void callB();
 
-/**
- * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- */
-public interface Jsr250Injector extends Injector {
-
-    /**
-     * Closes the Injector and calls {@link javax.annotation.PreDestroy} methods
-     */
-    void close();
+    public boolean hasBeenCalled();
 }

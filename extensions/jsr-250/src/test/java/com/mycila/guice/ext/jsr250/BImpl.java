@@ -16,15 +16,27 @@
 
 package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.Injector;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
-/**
- * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- */
-public interface Jsr250Injector extends Injector {
+public class BImpl implements B {
+    @Inject
+    private Provider<A> a;
 
-    /**
-     * Closes the Injector and calls {@link javax.annotation.PreDestroy} methods
-     */
-    void close();
+    private boolean called = false;
+
+    @PostConstruct
+    public void init() {
+        a.get().callA();
+    }
+
+    @Override
+    public void callB() {
+        called = true;
+    }
+
+    public boolean hasBeenCalled() {
+        return called;
+    }
 }

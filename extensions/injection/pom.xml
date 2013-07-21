@@ -16,7 +16,7 @@
     <properties>
         <osgi.private>com.mycila.internal</osgi.private>
         <osgi.import>*</osgi.import>
-        <osgi.export>!com.mycila.internal*,com.mycila*;version="${project.version}";-noimport:=true</osgi.export>
+        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.injection*;version="${project.version}";-noimport:=true</osgi.export>
     </properties>
 
     <dependencies>

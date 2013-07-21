@@ -16,22 +16,29 @@
 
 package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.TypeLiteral;
-import com.mycila.guice.ext.injection.MethodHandler;
-import com.mycila.guice.ext.injection.MethodInvoker;
-
-import javax.annotation.PreDestroy;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Provider;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250PreDestroyHandler implements MethodHandler<PreDestroy> {
-    @Override
-    public void handle(TypeLiteral<?> type, Object instance, Method method, PreDestroy annotation) {
-        if (!Modifier.isStatic(method.getModifiers())) {
-            new MethodInvoker(method).invoke(instance);
-        }
+public class Account {
+
+    @Resource
+    Bank bank;
+
+    String number;
+
+    @Resource
+    void init(Client client, @Named("RNG") Provider<Id> rng) {
+        number = bank.id() + "" + client.id() + "" + rng.get().id();
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    void close() {
     }
 }

@@ -40,7 +40,7 @@ public abstract class KeyProviderSkeleton<A extends Annotation> implements KeyPr
 
     @Override
     public List<Key<?>> getParameterKeys(TypeLiteral<?> injectedType, Method injectedMember, A resourceAnnotation) {
-        return TypeInfo.of(injectedType).getParameterKeys(injectedType, injectedMember);
+        return Reflect.getParameterKeys(injectedType, injectedMember);
     }
 
 }

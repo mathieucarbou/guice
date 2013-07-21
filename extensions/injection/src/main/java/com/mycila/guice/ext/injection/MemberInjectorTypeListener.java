@@ -16,6 +16,7 @@
 
 package com.mycila.guice.ext.injection;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.MembersInjector;
@@ -23,14 +24,10 @@ import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
-import com.mycila.inject.internal.Proxy;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newLinkedList;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -49,8 +46,8 @@ public final class MemberInjectorTypeListener<A extends Annotation> implements T
     public <I> void hear(final TypeLiteral<I> injectableType, TypeEncounter<I> encounter) {
         final Provider<? extends KeyProvider<A>> provider = encounter.getProvider(providerClass);
         final Provider<Injector> injectorProvider = encounter.getProvider(Injector.class);
-        final List<Field> fields = newLinkedList(TypeInfo.of(injectableType).findAllAnnotatedFields(annotationType));
-        final List<Method> methods = newLinkedList(TypeInfo.of(injectableType).findAllAnnotatedMethods(annotationType));
+        final List<Field> fields = Lists.newLinkedList(Reflect.findAllAnnotatedFields(injectableType.getRawType(), annotationType));
+        final List<MethodInvoker> methods = Lists.newLinkedList(Reflect.findAllAnnotatedInvokables(injectableType.getRawType(), annotationType));
         if (!fields.isEmpty() || !methods.isEmpty()) {
             encounter.register(new MembersInjector<I>() {
                 @Override
@@ -68,19 +65,20 @@ public final class MemberInjectorTypeListener<A extends Annotation> implements T
                         }
                     }
                     // inject methods
-                    for (Method method : methods) {
-                        List<Key<?>> parameterKeys = keyProvider.getParameterKeys(injectableType, method, method.getAnnotation(annotationType));
+                    for (MethodInvoker invokable : methods) {
+                        List<Key<?>> parameterKeys = keyProvider.getParameterKeys(injectableType, invokable.method, invokable.getAnnotation(annotationType));
                         Object[] parameters = new Object[parameterKeys.size()];
                         for (int i = 0; i < parameters.length; i++)
                             parameters[i] = injectorProvider.get().getProvider(parameterKeys.get(i)).get();
                         try {
-                            Proxy.invoker(method).invoke(injectee, parameters);
+                            invokable.invoke(injectee, parameters);
                         } catch (Exception e) {
-                            throw runtime(e);
+                            throw MycilaGuiceException.toRuntime(e);
                         }
                     }
                 }
             });
         }
     }
+
 }

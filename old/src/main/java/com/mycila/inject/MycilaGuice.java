@@ -59,36 +59,6 @@ public final class MycilaGuice {
         return this;
     }
 
-    public Scope expiringSingleton(long expirity, TimeUnit unit) {
-        return requestInjection(new ExpiringSingleton(expirity, unit));
-    }
-
-    public Scope renewableSingleton(long expirity, TimeUnit unit) {
-        return requestInjection(new RenewableSingleton(expirity, unit));
-    }
-
-    public Scope weakSingleton() {
-        return requestInjection(new WeakSingleton());
-    }
-
-    public Scope softSingleton() {
-        return requestInjection(new SoftSingleton());
-    }
-
-    public Scope concurrentSingleton() {
-        return requestInjection(new ConcurrentSingleton(10, TimeUnit.SECONDS));
-    }
-
-    public Scope concurrentSingleton(long expirity, TimeUnit unit) {
-        return requestInjection(new ConcurrentSingleton(expirity, unit));
-    }
-
-    public ResetScope resetSingleton() {
-        return requestInjection(new ResetSingleton());
-    }
-
-
-
     public <T> MycilaGuice bind(Class<T> type, T instance) {
         binder.bind(type).toInstance(requestInjection(instance));
         return this;

@@ -16,22 +16,11 @@
 
 package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.TypeLiteral;
-import com.mycila.guice.ext.injection.MethodHandler;
-import com.mycila.guice.ext.injection.MethodInvoker;
-
-import javax.annotation.PreDestroy;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250PreDestroyHandler implements MethodHandler<PreDestroy> {
-    @Override
-    public void handle(TypeLiteral<?> type, Object instance, Method method, PreDestroy annotation) {
-        if (!Modifier.isStatic(method.getModifiers())) {
-            new MethodInvoker(method).invoke(instance);
-        }
+public class Client {
+    public int id() {
+        return 3;
     }
 }

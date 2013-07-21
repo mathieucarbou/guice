@@ -42,7 +42,7 @@ public final class FieldHandlerTypeListener<A extends Annotation> implements Typ
     @Override
     public <I> void hear(final TypeLiteral<I> type, TypeEncounter<I> encounter) {
         final Provider<? extends FieldHandler<A>> provider = encounter.getProvider(handlerClass);
-        final List<Field> fields = Lists.newLinkedList(TypeInfo.of(type).findAllAnnotatedFields(annotationType));
+        final List<Field> fields = Lists.newLinkedList(Reflect.findAllAnnotatedFields(type.getRawType(), annotationType));
         if (!fields.isEmpty()) {
             encounter.register(new InjectionListener<I>() {
                 @Override

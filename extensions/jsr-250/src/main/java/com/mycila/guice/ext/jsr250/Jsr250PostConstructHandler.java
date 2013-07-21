@@ -20,9 +20,8 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.mycila.guice.ext.injection.MethodHandler;
-import com.mycila.inject.MycilaGuiceException;
-import com.mycila.inject.internal.Proxy;
-import com.mycila.inject.internal.Reflect;
+import com.mycila.guice.ext.injection.MethodInvoker;
+import com.mycila.guice.ext.injection.Reflect;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -40,18 +39,13 @@ final class Jsr250PostConstructHandler implements MethodHandler<PostConstruct> {
     Provider<Injector> injector;
 
     @Override
-    public <T> void handle(TypeLiteral<? extends T> type, T instance, Method method, PostConstruct annotation) {
+    public void handle(TypeLiteral<?> type, Object instance, Method method, PostConstruct annotation) {
         if (!Modifier.isStatic(method.getModifiers())) {
             List<Key<?>> parameterKeys = Reflect.getParameterKeys(type, method);
             Object[] parameters = new Object[parameterKeys.size()];
             for (int i = 0; i < parameters.length; i++)
                 parameters[i] = injector.get().getProvider(parameterKeys.get(i)).get();
-            try {
-                Proxy.invoker(method).invoke(instance, parameters);
-            }
-            catch (Exception e) {
-                throw MycilaGuiceException.runtime(e);
-            }
+            new MethodInvoker(method).invoke(instance, parameters);
         }
     }
 

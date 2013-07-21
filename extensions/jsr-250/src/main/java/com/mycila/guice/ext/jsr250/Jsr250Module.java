@@ -34,9 +34,9 @@ import com.google.inject.spi.Dependency;
 import com.google.inject.spi.HasDependencies;
 import com.google.inject.spi.InstanceBinding;
 import com.google.inject.spi.ProviderInstanceBinding;
-import com.mycila.guice.ext.injection.Injection;
+import com.mycila.guice.ext.injection.MBinder;
 import com.mycila.guice.ext.injection.MethodHandler;
-import com.mycila.guice.ext.injection.TypeInfo;
+import com.mycila.guice.ext.injection.Reflect;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -61,7 +61,7 @@ public final class Jsr250Module implements Module {
         binder.bind(Jsr250PostConstructHandler.class).in(Singleton.class);
         binder.bind(new TypeLiteral<MethodHandler<PreDestroy>>() {
         }).to(Jsr250PreDestroyHandler.class).in(Singleton.class);
-        Injection.on(binder)
+        MBinder.wrap(binder)
             .bindAnnotationInjector(Resource.class, Jsr250KeyProvider.class)
             .handleMethodAfterInjection(PostConstruct.class, Jsr250PostConstructHandler.class)
             .bind(Jsr250Destroyer.class, new Jsr250Destroyer() {
@@ -125,9 +125,9 @@ public final class Jsr250Module implements Module {
                 }
 
                 private void preDestroy(Object instance) {
-                    TypeInfo<?> type = TypeInfo.of(instance);
-                    for (Method method : type.findAllAnnotatedMethods(PreDestroy.class)) {
-                        destroyer.handle(type.getTypeLiteral(), instance, method, method.getAnnotation(PreDestroy.class));
+                    TypeLiteral<?> type = TypeLiteral.get(Reflect.getTargetClass(instance));
+                    for (Method method : Reflect.findAllAnnotatedMethods(type.getRawType(), PreDestroy.class)) {
+                        destroyer.handle(type, instance, method, method.getAnnotation(PreDestroy.class));
                     }
                 }
 

@@ -44,7 +44,7 @@ public final class MethodHandlerTypeListener<A extends Annotation> implements Ty
     @Override
     public <I> void hear(final TypeLiteral<I> type, TypeEncounter<I> encounter) {
         final Provider<? extends MethodHandler<A>> provider = encounter.getProvider(handlerClass);
-        final List<Method> methods = reverse(newLinkedList(TypeInfo.of(type).findAllAnnotatedMethods(annotationType)));
+        final List<Method> methods = reverse(newLinkedList(Reflect.findAllAnnotatedMethods(type.getRawType(), annotationType)));
         if (!methods.isEmpty()) {
             encounter.register(new InjectionListener<I>() {
                 @Override
