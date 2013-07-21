@@ -47,7 +47,7 @@ public class ServiceProviderTest {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                bind(Serv2.class).toProvider(new SingleServiceProvider<>(Serv2.class));
+                bind(Serv2.class).toProvider(new SingleServiceProvider<>(Serv2.class).allowMissingImplementation());
             }
         });
         assertNull(injector.getInstance(Serv2.class));

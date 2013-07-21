@@ -18,6 +18,7 @@ package com.mycila.guice.ext.service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.google.inject.ProvisionException;
 
 import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
@@ -31,6 +32,7 @@ public class SingleServiceProvider<T> implements Provider<T> {
     private Injector injector;
     private final Class<T> type;
     private final ClassLoader classLoader;
+    private boolean failIfNotFound = true;
 
     public SingleServiceProvider(Class<T> type) {
         this(type, type.getClassLoader());
@@ -41,6 +43,11 @@ public class SingleServiceProvider<T> implements Provider<T> {
         this.classLoader = classLoader;
     }
 
+    public SingleServiceProvider<T> allowMissingImplementation() {
+        failIfNotFound = false;
+        return this;
+    }
+
     @Override
     public T get() {
         try {
@@ -48,7 +55,11 @@ public class SingleServiceProvider<T> implements Provider<T> {
             injector.injectMembers(instance);
             return instance;
         } catch (NoSuchElementException e) {
-            return null;
+            if (failIfNotFound) {
+                throw new ProvisionException("No implementation found in classpath for interface: " + type.getName());
+            } else {
+                return null;
+            }
         }
     }
 
