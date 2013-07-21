@@ -1,3 +1,36 @@
+## Mycila Guice Extensions ##
+
+This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
+
+  - Closeable Injector
+  - JSR-250 support
+  - Legacy Binder
+  - JDK Services discovery
+  - Web Extensions
+
+## Maven Repository ##
+
+ - __Releases:__ http://repo1.maven.org/maven2/com/mycila/guice/extensions/
+
+ - __Snapshots:__ https://oss.sonatype.org/content/repositories/snapshots/com/mycila/guice/extensions/
+
+## Build Status ##
+
+[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
+
+## Extensions ##
+
+### Closeable Injector ###
+
+This extension allows your classes to listen when an Injector is closed, to be able to clean some resources for example.
+
+    <dependency>
+        <groupId>com.mycila.guice.extensions</groupId>
+        <artifactId>mycila-guice-closeable</artifactId>
+    </dependency>
+
+
+
 #summary Mycila Guice
 
 <wiki:toc max_depth="5" />
@@ -258,5 +291,3 @@ In this case. the module creates a binding of key `Set<AgentPlugin>` containing 
 
 == Testing integration ==
 
-
-[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
