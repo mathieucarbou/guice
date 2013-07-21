@@ -247,6 +247,13 @@ This will also add the two other module in your `Injector`.
 ___Loading custom implementation from the classpath___
 
 
+You can also bind an interface to one or several implementations discovered on the classpath by using the providers `SingleServiceProvider` or `MultiServiceProvider`.  
+
+    bind(MyService.class).toProvider(new SingleServiceProvider<>(Service.class));
+    bind(MyService[].class).toProvider(new MultiServiceProvider<>(Service.class));
+
+Just put on your classpath the file `META-INF/services/my.package.MyService` and the list of implementations in it.
+
 ### 6. Web Extensions ###
 
 
