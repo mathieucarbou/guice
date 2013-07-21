@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>web</artifactId>
+    <artifactId>mycila-guice-web</artifactId>
     <name>Mycila Guice Extensions :: Web</name>
     <packaging>jar</packaging>
 
@@ -34,7 +34,30 @@
     </build>
 
     <dependencies>
-        
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mycila.guice.extensions</groupId>
+            <artifactId>mycila-guice-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mycila.guice.extensions</groupId>
+            <artifactId>mycila-guice-closeable</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit-dep</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

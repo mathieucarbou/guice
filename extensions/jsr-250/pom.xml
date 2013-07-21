@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>jsr-250</artifactId>
+    <artifactId>mycila-guice-jsr250</artifactId>
     <name>Mycila Guice Extensions :: JSR-250</name>
     <packaging>jar</packaging>
 
@@ -36,7 +36,11 @@
     <dependencies>
         <dependency>
             <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>injection</artifactId>
+            <artifactId>mycila-guice-injection</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mycila.guice.extensions</groupId>
+            <artifactId>mycila-guice-closeable</artifactId>
         </dependency>
 
         <dependency>

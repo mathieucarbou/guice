@@ -16,7 +16,10 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Provider;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import org.junit.Test;
 
 import javax.annotation.PostConstruct;
@@ -61,12 +64,12 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testUntargettedBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(TestSingleton.class);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         TestSingleton component = injector.getInstance(TestSingleton.class);
         assertEquals(1, component.initialized);
@@ -79,12 +82,12 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testLinkedBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(SomeInterface.class).to(TestSingleton.class);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         TestSingleton component = (TestSingleton) injector.getInstance(SomeInterface.class);
         assertEquals(1, component.initialized);
@@ -99,13 +102,13 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testLinkedAndUntargettedBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(TestSingleton.class);
                 bind(SomeInterface.class).to(TestSingleton.class);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         TestSingleton component = (TestSingleton) injector.getInstance(SomeInterface.class);
         assertEquals(1, component.initialized);
@@ -120,14 +123,14 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testInstanceBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 TestSingleton instance = new TestSingleton();
                 bind(SomeInterface.class).toInstance(instance);
                 bind(AnotherInterface.class).toInstance(instance);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         TestSingleton component = (TestSingleton) injector.getInstance(SomeInterface.class);
         assertEquals(1, component.initialized);
@@ -142,14 +145,14 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testNonSingletonInstanceBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector  injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 NonScopedTestObject instance = new NonScopedTestObject();
                 bind(SomeInterface.class).toInstance(instance);
                 bind(AnotherInterface.class).toInstance(instance);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         // The object is not scoped but Guice considers instance bindings to be singletons so Mycila will destroy it
 
@@ -166,7 +169,7 @@ public class MycilaInitDestroyBindingsTest {
 
     @Test
     public void testProviderBinding() {
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 final TestSingleton instance = new TestSingleton();
@@ -183,7 +186,7 @@ public class MycilaInitDestroyBindingsTest {
                     }
                 });
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         // Provider bindings are not scoped so Mycila will not destroy them
 
@@ -212,13 +215,13 @@ public class MycilaInitDestroyBindingsTest {
             }
         };
 
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(TestSingleton.class).toProvider(testProvider1);
                 bind(SomeInterface.class).toProvider(testProvider2);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         // Guice will do injection on the provider but will not destroy it since its not singleton scoped
 

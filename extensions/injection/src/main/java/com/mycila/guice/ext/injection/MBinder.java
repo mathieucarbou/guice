@@ -65,23 +65,9 @@ public class MBinder implements Binder {
         return this;
     }
 
-    public MBinder intercept(Matcher<? super Class<?>> classMatcher,
-                                     Matcher<? super Method> methodMatcher,
-                                     MethodInterceptor... interceptors) {
-        for (MethodInterceptor interceptor : interceptors)
-            requestInjection(interceptor);
-        binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
-        return this;
-    }
-
     public <T> T willInject(T object) {
         binder.requestInjection(object);
         return object;
-    }
-
-    public <T> MBinder bind(Class<T> type, T instance) {
-        binder.bind(type).toInstance(willInject(instance));
-        return this;
     }
 
     public static MBinder wrap(Binder binder) {

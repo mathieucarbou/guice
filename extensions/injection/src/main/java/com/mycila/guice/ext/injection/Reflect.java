@@ -110,6 +110,23 @@ public class Reflect {
         };
     }
 
+    public static Predicate<Method> withSignature(final String methodName, final Class<?>... classes) {
+        return new Predicate<Method>() {
+            @Override
+            public boolean apply(Method member) {
+                if (!member.getName().equals(methodName)) return false;
+                Class<?>[] thisParams = member.getParameterTypes();
+                if (thisParams.length != classes.length)
+                    return false;
+                int c = 0;
+                for (Class<?> thisParam : thisParams)
+                    if (thisParam != classes[c++])
+                        return false;
+                return true;
+            }
+        };
+    }
+
     private static final Function<Signature, Method> TO_METHOD = new Function<Signature, Method>() {
         @Override
         public Method apply(Signature from) {

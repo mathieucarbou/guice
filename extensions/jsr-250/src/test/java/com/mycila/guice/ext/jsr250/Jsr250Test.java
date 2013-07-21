@@ -16,10 +16,13 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import com.google.inject.Stage;
 import com.google.inject.matcher.Matchers;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.injection.MBinder;
 import com.mycila.guice.ext.injection.Reflect;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -52,7 +55,7 @@ public class Jsr250Test {
 
     @Test
     public void test_resource() throws Exception {
-        Jsr250.createInjector(Stage.PRODUCTION).getInstance(ResClass.class);
+        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule()).getInstance(ResClass.class);
         assertEquals(2, ResClass.verified);
     }
 
@@ -86,7 +89,7 @@ public class Jsr250Test {
     public void test_post_inject_param() throws Exception {
         assertFalse(MyM.AAA.CALLED);
         assertFalse(MyM.AAA.SECOND);
-        Jsr250.createInjector(Stage.PRODUCTION, new MyM());
+        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new MyM());
         assertTrue(MyM.AAA.CALLED);
         assertTrue(MyM.AAA.SECOND);
     }
@@ -127,7 +130,7 @@ public class Jsr250Test {
     @Test
     public void test_destroy() throws Exception {
         final Class[] cc = {AA.class};
-        Jsr250Injector injector = Jsr250.createInjector(Stage.PRODUCTION, new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 for (Class<?> c : cc) {
@@ -142,7 +145,7 @@ public class Jsr250Test {
                     }
                 });
             }
-        });
+        }).getInstance(CloseableInjector.class);
         for (Class<?> c : cc) {
             injector.getInstance(c);
             injector.getInstance(c);
@@ -177,7 +180,7 @@ public class Jsr250Test {
     @Test
     public void test_inject_in_interceptor() throws Exception {
         B.calls.clear();
-        Jsr250Injector injector = Jsr250.createInjector(new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 MBinder.wrap(binder()).bindInterceptor(Matchers.subclassesOf(A.class), Matchers.any(), new MethodInterceptor() {
@@ -192,7 +195,7 @@ public class Jsr250Test {
                     }
                 });
             }
-        });
+        }).getInstance(CloseableInjector.class);
         B b = injector.getInstance(B.class);
         assertSame(b, injector.getInstance(B.class));
         b.intercept();
@@ -203,11 +206,11 @@ public class Jsr250Test {
     @Test
     public void test() throws Exception {
         B.calls.clear();
-        Jsr250Injector injector = Jsr250.createInjector(Stage.PRODUCTION, new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
             }
-        });
+        }).getInstance(CloseableInjector.class);
         injector.getInstance(B.class);
         assertEquals("[1, 2]", B.calls.toString());
         injector.close();

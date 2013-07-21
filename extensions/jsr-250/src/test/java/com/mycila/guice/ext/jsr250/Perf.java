@@ -18,6 +18,7 @@ package com.mycila.guice.ext.jsr250;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
+import com.mycila.guice.ext.closeable.CloseableModule;
 
 import javax.annotation.PostConstruct;
 
@@ -61,7 +62,7 @@ class Perf {
         }
     }
 
-    public static void main(String[] args) throws Throwable{
+    public static void main(String[] args) throws Throwable {
 
         // connect visual vm
         Thread.sleep(10000);
@@ -97,7 +98,7 @@ class Perf {
     }
 
     private static Injector createInjectorWithMycila() {
-        return Jsr250.createInjector(Stage.PRODUCTION);
+        return Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule());
     }
 
     private static Injector createSimpleInjector() {

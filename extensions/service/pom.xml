@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>service</artifactId>
+    <artifactId>mycila-guice-service</artifactId>
     <name>Mycila Guice Extensions :: Service Loader</name>
     <packaging>jar</packaging>
 

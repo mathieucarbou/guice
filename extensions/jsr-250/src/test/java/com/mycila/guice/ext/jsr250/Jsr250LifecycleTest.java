@@ -16,6 +16,9 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import org.junit.Test;
 
 import javax.annotation.PostConstruct;
@@ -151,7 +154,7 @@ public class Jsr250LifecycleTest {
     }
 
     private void assertLifeCycleSequenceContainsAll(final Class<? extends LifecycleBase> clazz, String startSequence, String endSequence) {
-        Jsr250Injector injector = createInjector(clazz);
+        CloseableInjector injector = createInjector(clazz);
         LifecycleBase component = injector.getInstance(clazz);
         assertContainsAll(component.startSequence, startSequence);
         injector.close();
@@ -159,20 +162,20 @@ public class Jsr250LifecycleTest {
     }
 
     private void assertLifeCycleSequence(final Class<? extends LifecycleBase> clazz, String expectedStartSequence, String expectedStopSequence) {
-        Jsr250Injector injector = createInjector(clazz);
+        CloseableInjector injector = createInjector(clazz);
         LifecycleBase component = injector.getInstance(clazz);
         assertEquals(expectedStartSequence, component.startSequence);
         injector.close();
         assertEquals(expectedStopSequence, component.stopSequence);
     }
 
-    private Jsr250Injector createInjector(final Class<? extends LifecycleBase> clazz) {
-        return Jsr250.createInjector(new AbstractModule() {
+    private CloseableInjector createInjector(final Class<? extends LifecycleBase> clazz) {
+        return Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(clazz);
             }
-        });
+        }).getInstance(CloseableInjector.class);
     }
 
     private void assertContainsAll(String string, String requiredCharacters) {

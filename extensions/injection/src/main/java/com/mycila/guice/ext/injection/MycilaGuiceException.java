@@ -22,17 +22,14 @@ import java.util.concurrent.ExecutionException;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 public class MycilaGuiceException extends RuntimeException {
-    private MycilaGuiceException(String message, Throwable cause) {
+
+    public MycilaGuiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    private MycilaGuiceException(Throwable cause) {
+    public MycilaGuiceException(Throwable cause) {
         super(cause.getMessage(), cause);
         setStackTrace(cause.getStackTrace());
-    }
-
-    public static MycilaGuiceException exception(String message, Throwable cause) {
-        return new MycilaGuiceException(message, cause);
     }
 
     public static RuntimeException toRuntime(Throwable throwable) {

@@ -26,8 +26,10 @@
     </scm>
 
     <modules>
+        <module>extensions/closeable</module>
         <module>extensions/injection</module>
         <module>extensions/jsr-250</module>
+        <module>extensions/legacy</module>
         <module>extensions/service</module>
         <module>extensions/web</module>
     </modules>
@@ -36,7 +38,22 @@
         <dependencies>
             <dependency>
                 <groupId>com.mycila.guice.extensions</groupId>
-                <artifactId>injection</artifactId>
+                <artifactId>mycila-guice-closeable</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-injection</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-jsr250</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -59,6 +76,22 @@
                 <groupId>junit</groupId>
                 <artifactId>junit-dep</artifactId>
                 <version>4.10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-servlet</artifactId>
+                <version>3.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.inject</groupId>
+                        <artifactId>guice</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>3.0-alpha-1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

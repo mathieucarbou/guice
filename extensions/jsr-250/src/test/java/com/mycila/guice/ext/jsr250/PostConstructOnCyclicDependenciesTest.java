@@ -16,7 +16,10 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.ProvisionException;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,22 +29,22 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PostConstructOnCyclicDependenciesTest {
-    Jsr250Injector inj;
+    CloseableInjector inj;
 
     @Before
     public void setUp() throws Exception {
-        inj = Jsr250.createInjector(new AbstractModule() {
+        inj = Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(A.class).to(AImpl.class);
                 bind(B.class).to(BImpl.class);
             }
-        });
+        }).getInstance(CloseableInjector.class);
     }
 
     @After
     public void tearDown() throws Exception {
-        Jsr250Injector dying = inj;
+        CloseableInjector dying = inj;
         inj = null;
         dying.close();
     }

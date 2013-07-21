@@ -16,9 +16,12 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.injection.KeyProviderSkeleton;
 import com.mycila.guice.ext.injection.MBinder;
 import org.junit.Test;
@@ -43,18 +46,18 @@ import static junit.framework.Assert.assertNull;
 public class BinderHelperTest {
 
     @Autowire
-    Jsr250Injector jsr250Injector;
+    CloseableInjector jsr250Injector;
 
     @Test
     public void test() throws Exception {
         assertNull(jsr250Injector);
-         Jsr250.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                MBinder.wrap(binder()).bindAnnotationInjector(Autowire.class, AutowireKeyProvider.class);
-                requestInjection(BinderHelperTest.this);
-            }
-        });
+         Guice.createInjector(new Jsr250Module(), new CloseableModule(), new AbstractModule() {
+             @Override
+             protected void configure() {
+                 MBinder.wrap(binder()).bindAnnotationInjector(Autowire.class, AutowireKeyProvider.class);
+                 requestInjection(BinderHelperTest.this);
+             }
+         });
         assertNotNull(jsr250Injector);
     }
 

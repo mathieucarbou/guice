@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>injection</artifactId>
+    <artifactId>mycila-guice-injection</artifactId>
     <name>Mycila Guice Extensions :: Injection</name>
     <packaging>jar</packaging>
 

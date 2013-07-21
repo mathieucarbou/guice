@@ -16,7 +16,10 @@
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Stage;
+import com.mycila.guice.ext.closeable.CloseableInjector;
+import com.mycila.guice.ext.closeable.CloseableModule;
 import org.junit.Test;
 
 import javax.annotation.PreDestroy;
@@ -57,13 +60,13 @@ public class MycilaDestroyOrderTest {
 
         // This test fails because Mycila destroys singletons in the order they are bound
 
-        Jsr250Injector injector = Jsr250.createInjector(Stage.PRODUCTION, new AbstractModule() {
+        CloseableInjector injector = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
                 bind(Repository.class);
                 bind(Service.class);
             }
-        });
+        }).getInstance(CloseableInjector.class);
 
         injector.close();
     }
