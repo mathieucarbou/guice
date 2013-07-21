@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MycilaGuice {
+public class MycilaGuice {
     private final Binder binder;
 
     private MycilaGuice(Binder binder) {
@@ -96,7 +96,7 @@ public final class MycilaGuice {
             || annotationType.isAnnotationPresent(Qualifier.class);
     }
 
-    private static final class DelegatingInterceptor implements MethodInterceptor {
+    private static class DelegatingInterceptor implements MethodInterceptor {
 
         private final Provider<? extends MethodInterceptor> provider;
 
@@ -115,7 +115,7 @@ public final class MycilaGuice {
         }
     }
 
-    static final class SignatureMatcher extends AbstractMatcher<Method> {
+    static class SignatureMatcher extends AbstractMatcher<Method> {
         private final Signature signature;
 
         private SignatureMatcher(Method method) {

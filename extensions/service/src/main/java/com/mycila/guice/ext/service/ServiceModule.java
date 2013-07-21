@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.inject.service;
+package com.mycila.guice.ext.service;
 
+import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
-import com.mycila.inject.annotation.OverrideModule;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,25 +26,35 @@ import java.util.ServiceLoader;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public class ServiceModules {
+public class ServiceModule implements Module {
 
-    private ServiceModules() {
+    private final ClassLoader classLoader;
+
+    public ServiceModule() {
+        this(Thread.currentThread().getContextClassLoader());
     }
 
-    public static Module loadFromClasspath() {
-        return loadFromClasspath(Module.class);
+    public ServiceModule(ClassLoader classLoader) {
+        this.classLoader = classLoader;
     }
 
-    public static Module loadFromClasspath(Class<? extends Module> moduleType) {
-        List<Module> runtime = new LinkedList<Module>();
-        List<Module> overrides = new LinkedList<Module>();
-        for (Module module : ServiceLoader.load(moduleType)) {
+    @Override
+    public void configure(Binder binder) {
+        List<Module> runtime = new LinkedList<>();
+        List<Module> overrides = new LinkedList<>();
+        for (Module module : ServiceLoader.load(Module.class, classLoader)) {
             if (module.getClass().isAnnotationPresent(OverrideModule.class))
                 overrides.add(module);
             else
                 runtime.add(module);
         }
-        return overrides.isEmpty() ? Modules.combine(runtime) : Modules.override(runtime).with(overrides);
+        if (overrides.isEmpty()) {
+            for (Module module : runtime) {
+                binder.install(module);
+            }
+        } else {
+            binder.install(Modules.override(runtime).with(overrides));
+        }
     }
 
 }

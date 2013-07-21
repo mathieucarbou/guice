@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MycilaGuiceException extends RuntimeException {
+public class MycilaGuiceException extends RuntimeException {
     private MycilaGuiceException(String message, Throwable cause) {
         super(message, cause);
     }

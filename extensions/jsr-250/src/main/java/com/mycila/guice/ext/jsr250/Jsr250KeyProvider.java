@@ -26,7 +26,7 @@ import java.lang.reflect.Field;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
+class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
     @Override
     public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, Resource resourceAnnotation) {
         String name = resourceAnnotation.name();

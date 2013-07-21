@@ -42,7 +42,7 @@ import java.lang.reflect.Method;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  * @date 2013-07-20
  */
-public final class MBinder implements Binder {
+public class MBinder implements Binder {
 
     private final Binder binder;
 

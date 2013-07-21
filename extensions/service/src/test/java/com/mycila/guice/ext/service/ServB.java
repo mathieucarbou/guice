@@ -13,24 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.guice.ext.jsr250;
-
-import com.google.inject.TypeLiteral;
-import com.mycila.guice.ext.injection.MethodHandler;
-import com.mycila.guice.ext.injection.MethodInvoker;
-
-import javax.annotation.PreDestroy;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+package com.mycila.guice.ext.service;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-class Jsr250PreDestroyHandler implements MethodHandler<PreDestroy> {
-    @Override
-    public void handle(TypeLiteral<?> type, Object instance, Method method, PreDestroy annotation) {
-        if (!Modifier.isStatic(method.getModifiers())) {
-            MethodInvoker.on(method).invoke(instance);
-        }
-    }
+public class ServB implements Serv {
 }

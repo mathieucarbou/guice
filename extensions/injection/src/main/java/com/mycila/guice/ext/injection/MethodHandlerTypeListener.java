@@ -31,7 +31,7 @@ import static com.google.common.collect.Lists.reverse;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MethodHandlerTypeListener<A extends Annotation> implements TypeListener {
+public class MethodHandlerTypeListener<A extends Annotation> implements TypeListener {
     private final Class<A> annotationType;
     private final Class<? extends MethodHandler<A>> handlerClass;
 

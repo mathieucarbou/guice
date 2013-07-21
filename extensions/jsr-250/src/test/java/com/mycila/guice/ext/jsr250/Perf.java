@@ -25,7 +25,7 @@ import javax.annotation.PostConstruct;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  * @date 2013-07-06
  */
-final class Perf {
+class Perf {
 
     private static long invocations;
 

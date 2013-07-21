@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.inject.annotation;
+package com.mycila.guice.ext.service;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import com.google.inject.AbstractModule;
 
 /**
- * Annotated a module if you want it to override bindings from other modules
+ * @author Mathieu Carbou (mathieu.carbou@gmail.com)
+ * @date 2013-07-21
  */
-@Target(ElementType.TYPE)
-@Retention(RUNTIME)
-@Inherited
-public @interface OverrideModule {
+@OverrideModule
+public final class MyOverrideModule extends AbstractModule {
+    static int hit;
+
+    @Override
+    protected void configure() {
+        hit++;
+        bind(Serv.class).to(ServB.class);
+    }
 }

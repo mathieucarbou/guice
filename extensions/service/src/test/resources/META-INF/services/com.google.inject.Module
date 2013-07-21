@@ -1,0 +1,2 @@
+com.mycila.guice.ext.service.MyModule
+com.mycila.guice.ext.service.MyOverrideModule

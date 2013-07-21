@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250PostConstructHandler implements MethodHandler<PostConstruct> {
+class Jsr250PostConstructHandler implements MethodHandler<PostConstruct> {
 
     @Inject
     Provider<Injector> injector;

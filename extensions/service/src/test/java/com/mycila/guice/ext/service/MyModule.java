@@ -13,33 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.inject.guice;
+package com.mycila.guice.ext.service;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.mycila.inject.service.ServiceLoaderProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
+ * @date 2013-07-21
  */
-@RunWith(JUnit4.class)
-public final class ServiceLoaderProviderTest {
-
-    @Test
-    public void test() throws Exception {
-        Injector injector = Guice.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(Serv[].class).toProvider(ServiceLoaderProvider.of(Serv.class));
-            }
-        });
-        assertEquals(2, injector.getInstance(Serv[].class).length);
+public final class MyModule extends AbstractModule {
+    static int hit;
+    @Override
+    protected void configure() {
+        hit++;
+        bind(Serv.class).to(ServA.class);
     }
-
 }

@@ -34,7 +34,7 @@ import java.util.Set;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class Jsr250InjectorImpl implements Jsr250Injector {
+class Jsr250InjectorImpl implements Jsr250Injector {
 
     private volatile boolean closed;
 

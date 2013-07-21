@@ -48,7 +48,7 @@ import static org.junit.Assert.assertTrue;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 @RunWith(JUnit4.class)
-public final class Jsr250Test {
+public class Jsr250Test {
 
     @Test
     public void test_resource() throws Exception {

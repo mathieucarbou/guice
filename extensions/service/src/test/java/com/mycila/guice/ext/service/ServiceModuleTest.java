@@ -13,10 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.inject.guice;
+package com.mycila.guice.ext.service;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class ServB implements Serv {
+@RunWith(JUnit4.class)
+public class ServiceModuleTest {
+
+    @Test
+    public void test_module() throws Exception {
+        Injector injector = Guice.createInjector(new ServiceModule());
+        assertEquals(ServB.class, injector.getInstance(Serv.class).getClass());
+        assertEquals(1, MyModule.hit);
+        assertEquals(1, MyOverrideModule.hit);
+    }
+
 }

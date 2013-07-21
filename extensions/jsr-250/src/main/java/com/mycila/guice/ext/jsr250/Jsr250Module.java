@@ -51,7 +51,7 @@ import java.util.Set;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class Jsr250Module implements Module {
+public class Jsr250Module implements Module {
 
     @Override
     public void configure(Binder binder) {

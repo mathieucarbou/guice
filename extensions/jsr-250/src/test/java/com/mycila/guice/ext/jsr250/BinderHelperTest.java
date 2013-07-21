@@ -40,7 +40,7 @@ import static junit.framework.Assert.assertNull;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 @RunWith(JUnit4.class)
-public final class BinderHelperTest {
+public class BinderHelperTest {
 
     @Autowire
     Jsr250Injector jsr250Injector;
@@ -64,7 +64,7 @@ public final class BinderHelperTest {
         String value() default "";
     }
 
-    static final class AutowireKeyProvider extends KeyProviderSkeleton<Autowire> {
+    static class AutowireKeyProvider extends KeyProviderSkeleton<Autowire> {
         @Override
         public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, Autowire resourceAnnotation) {
             String name = resourceAnnotation.value();

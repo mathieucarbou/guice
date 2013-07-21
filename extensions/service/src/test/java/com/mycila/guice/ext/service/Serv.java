@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.inject.guice;
+package com.mycila.guice.ext.service;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)

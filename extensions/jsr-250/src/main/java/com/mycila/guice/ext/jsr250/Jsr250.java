@@ -25,7 +25,7 @@ import java.util.Arrays;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class Jsr250 {
+public class Jsr250 {
 
     private Jsr250() {
     }

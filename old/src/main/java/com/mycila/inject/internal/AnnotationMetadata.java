@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-final class AnnotationMetadata<T extends Annotation> {
+class AnnotationMetadata<T extends Annotation> {
 
     private static final boolean hasAnnotationType;
     private static final Map<Class<?>, Object> DEFAULTS = new HashMap<Class<?>, Object>(16) {
