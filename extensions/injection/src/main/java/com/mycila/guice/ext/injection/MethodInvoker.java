@@ -1,11 +1,11 @@
 /**
- * Copyright (C) 2010 Mathieu Carbou <mathieu.carbou@gmail.com>
+ * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,40 +13,76 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.mycila.guice.ext.injection;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.inject.internal.BytecodeGen;
+import com.google.inject.internal.cglib.core.$CodeGenerationException;
+import com.google.inject.internal.cglib.reflect.$FastMethod;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 public class MethodInvoker implements Member, AnnotatedElement {
 
+    private static final LoadingCache<Method, MethodInvoker> INVOKERS = CacheBuilder.newBuilder()
+        .weakKeys()
+        .build(new CacheLoader<Method, MethodInvoker>() {
+            @Override
+            public MethodInvoker load(final Method method) throws Exception {
+                int modifiers = method.getModifiers();
+                if (!Modifier.isPrivate(modifiers) && !Modifier.isProtected(modifiers)) {
+                    try {
+                        final $FastMethod fastMethod = BytecodeGen.newFastClass(method.getDeclaringClass(), BytecodeGen.Visibility.forMember(method)).getMethod(method);
+                        return new MethodInvoker(method) {
+                            @Override
+                            public Object invoke(Object target, Object... parameters) {
+                                try {
+                                    return fastMethod.invoke(target, parameters);
+                                } catch (InvocationTargetException e) {
+                                    throw MycilaGuiceException.toRuntime(e);
+                                }
+                            }
+                        };
+                    } catch ($CodeGenerationException e) {/* fall-through */}
+                }
+                if (!Modifier.isPublic(modifiers) || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
+                    method.setAccessible(true);
+                }
+                return new MethodInvoker(method);
+            }
+        });
+
     public final Method method;
 
-    public MethodInvoker(Method method) {
+    private MethodInvoker(Method method) {
         this.method = method;
     }
 
     public Object invoke(Object target, Object... parameters) {
-        if (!method.isAccessible()) {
-            method.setAccessible(true);
+        try {
+            return method.invoke(target, parameters);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw MycilaGuiceException.toRuntime(e);
         }
-        return new MethodInvoker(method) {
-            @Override
-            public Object invoke(Object target, Object... parameters) {
-                try {
-                    return method.invoke(target, parameters);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    throw MycilaGuiceException.toRuntime(e);
-                }
-            }
-        };
+    }
+
+    public static MethodInvoker on(Method method) {
+        try {
+            return INVOKERS.get(method);
+        } catch (ExecutionException e) {
+            throw MycilaGuiceException.toRuntime(e);
+        }
     }
 
     @Override

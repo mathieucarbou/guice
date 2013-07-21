@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Mycila <mathieu.carbou@gmail.com>
+ * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.AbstractModule;
@@ -150,7 +149,7 @@ public final class Jsr250Test {
         }
 
         Collections.sort(Base.calls);
-        assertEquals("[GG]", Base.calls.toString());
+        assertEquals("[]", Base.calls.toString());
 
         for (Class<?> c : cc) {
             injector.getInstance(c);
@@ -159,7 +158,7 @@ public final class Jsr250Test {
         injector.close();
 
         Collections.sort(Base.calls);
-        assertEquals("[AA, BB, CC, DD, EE, FF, GG, GG]", Base.calls.toString());
+        assertEquals("[AA]", Base.calls.toString());
     }
 
     static class Base {
@@ -210,9 +209,9 @@ public final class Jsr250Test {
             }
         });
         injector.getInstance(B.class);
-        assertEquals("[4, 1, 2]", B.calls.toString());
+        assertEquals("[1, 2]", B.calls.toString());
         injector.close();
-        assertEquals("[4, 1, 2, 5, 3]", B.calls.toString());
+        assertEquals("[1, 2, 3]", B.calls.toString());
     }
 
     static class A {

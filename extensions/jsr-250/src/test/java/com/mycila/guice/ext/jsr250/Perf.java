@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Mycila <mathieu.carbou@gmail.com>
+ * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.Guice;
@@ -62,7 +61,10 @@ final class Perf {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable{
+
+        // connect visual vm
+        Thread.sleep(10000);
 
         int n = 1 * 1000 * 10000;
 

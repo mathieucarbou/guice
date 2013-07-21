@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Mycila <mathieu.carbou@gmail.com>
+ * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.Injector;
@@ -45,7 +44,7 @@ final class Jsr250PostConstructHandler implements MethodHandler<PostConstruct> {
             Object[] parameters = new Object[parameterKeys.size()];
             for (int i = 0; i < parameters.length; i++)
                 parameters[i] = injector.get().getProvider(parameterKeys.get(i)).get();
-            new MethodInvoker(method).invoke(instance, parameters);
+            MethodInvoker.on(method).invoke(instance, parameters);
         }
     }
 
