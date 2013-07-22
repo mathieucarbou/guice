@@ -42,7 +42,7 @@ public class ClassToTypeLiteralMatcherAdapter extends AbstractMatcher<TypeLitera
         return m.matches(typeLiteral);
     }
 
-    static Matcher<TypeLiteral<?>> adapt(Matcher<AnnotatedElement> classMatcher) {
+    public static Matcher<TypeLiteral<?>> adapt(Matcher<AnnotatedElement> classMatcher) {
         return new ClassToTypeLiteralMatcherAdapter(classMatcher);
     }
 }
