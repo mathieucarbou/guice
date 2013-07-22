@@ -19,10 +19,10 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
+import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.util.Modules;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.service.ServiceModule;
-import com.mycila.guice.ext.servlet.GuiceServletContextListener;
 
 import javax.servlet.ServletContextEvent;
 
