@@ -31,6 +31,7 @@
         <module>extensions/injection</module>
         <module>extensions/jsr-250</module>
         <module>extensions/legacy</module>
+        <module>extensions/servlet</module>
         <module>extensions/service</module>
         <module>extensions/web</module>
     </modules>
@@ -55,6 +56,11 @@
             <dependency>
                 <groupId>com.mycila.guice.extensions</groupId>
                 <artifactId>mycila-guice-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-servlet</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -83,17 +89,6 @@
                 <groupId>junit</groupId>
                 <artifactId>junit-dep</artifactId>
                 <version>4.10</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.inject.extensions</groupId>
-                <artifactId>guice-servlet</artifactId>
-                <version>3.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.inject</groupId>
-                        <artifactId>guice</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>

@@ -17,8 +17,8 @@ package com.mycila.guice.ext.web;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.google.inject.servlet.RequestParameters;
 import com.mycila.guice.ext.service.OverrideModule;
+import com.mycila.guice.ext.servlet.RequestParameters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

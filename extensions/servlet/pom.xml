@@ -9,12 +9,12 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>mycila-guice-web</artifactId>
-    <name>Mycila Guice Extensions :: Web</name>
+    <artifactId>mycila-guice-servlet</artifactId>
+    <name>Mycila Guice Extensions :: Servlet</name>
     <packaging>jar</packaging>
 
     <properties>
-        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.web*;version="${project.version}";-noimport:=true</osgi.export>
+        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.servlet*;version="${project.version}";-noimport:=true</osgi.export>
     </properties>
 
     <build>
@@ -35,16 +35,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-service</artifactId>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-guice</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-closeable</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-servlet</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <dependency>
