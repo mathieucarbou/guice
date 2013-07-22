@@ -4,8 +4,8 @@
 
     <parent>
         <groupId>com.mycila</groupId>
-        <artifactId>pom</artifactId>
-        <version>6-SNAPSHOT</version>
+        <artifactId>mycila-pom</artifactId>
+        <version>1-SNAPSHOT</version>
         <relativePath>../pom</relativePath>
     </parent>
 
@@ -27,6 +27,7 @@
 
     <modules>
         <module>extensions/closeable</module>
+        <module>extensions/groovy</module>
         <module>extensions/injection</module>
         <module>extensions/jsr-250</module>
         <module>extensions/legacy</module>
@@ -92,6 +93,11 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>3.0-alpha-1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>2.1.6</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

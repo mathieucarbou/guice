@@ -9,12 +9,12 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>mycila-guice-web</artifactId>
-    <name>Mycila Guice Extensions :: Web</name>
+    <artifactId>mycila-guice-groovy</artifactId>
+    <name>Mycila Guice Extensions :: Groovy</name>
     <packaging>jar</packaging>
 
     <properties>
-        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.web*;version="${project.version}";-noimport:=true</osgi.export>
+        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.groovy*;version="${project.version}";-noimport:=true</osgi.export>
     </properties>
 
     <build>
@@ -35,28 +35,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-servlet</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-service</artifactId>
+            <artifactId>mycila-guice-injection</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-closeable</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit-dep</artifactId>
-            <scope>test</scope>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
         </dependency>
     </dependencies>
 
