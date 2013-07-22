@@ -1,8 +1,8 @@
-**Table of Contents**
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
-	- [Maven Repository](#maven-repository)
 	- [Build Status](#build-status)
+	- [Maven Repository](#maven-repository)
 	- [Extensions](#extensions)
 		- [1. Customizes injection annotations](#1-customizes-injection-annotations)
 		- [2. Closeable Injector](#2-closeable-injector)
@@ -10,6 +10,7 @@
 		- [4. Legacy and Factory Binder](#4-legacy-and-factory-binder)
 		- [5. Service and Module discovery](#5-service-and-module-discovery)
 		- [6. Web Extensions](#6-web-extensions)
+		- [7. Groovy Extensions](#7-groovy-extensions)
 
 # Mycila Guice Extensions #
 
@@ -278,5 +279,42 @@ Just declare the `MycilaGuiceListener` as a listener in your `web.xml` file. The
         <listener-class>com.mycila.guice.ext.web.MycilaGuiceListener</listener-class>
     </listener>
 
+### 7. Groovy Extensions ###
 
+This extension scans for classes having methods annotated by `@Expand` and add those methods to target Groovy classes.
 
+__Maven dependency__
+
+    <dependency>
+        <groupId>com.mycila.guice.extensions</groupId>
+        <artifactId>mycila-guice-groovy</artifactId>
+        <version>X.Y.ga</version>
+    </dependency>
+
+__Note__
+
+This extension is automatically discovered when using the [Service and Module discovery extension](#5-service-and-module-discovery).
+
+__Usage__
+
+Just add the module `ExpandModule` in your Injector. Supposing you have a repository class and a Book class:
+
+    class Book {
+        // [...]
+    }
+    
+    class BookRepository {
+    
+        @Expand(Book)
+        Book findById(String id) { [...] }
+        
+        @Expand(Book)
+        Book save(Book b) { [...] }
+    
+    } 
+
+Than you can now in your code execute:
+
+    Book b = Book.findById('123')
+    // [...]
+    b.save()
