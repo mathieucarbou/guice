@@ -58,6 +58,11 @@
             <artifactId>junit-dep</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.mycila.guice.extensions</groupId>
+            <artifactId>mycila-guice-jsr250</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

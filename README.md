@@ -1,4 +1,4 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents**
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
 	- [Maven Repository](#maven-repository)
@@ -10,11 +10,16 @@
 		- [4. Legacy and Factory Binder](#4-legacy-and-factory-binder)
 		- [5. Service and Module discovery](#5-service-and-module-discovery)
 		- [6. Web Extensions](#6-web-extensions)
-- [](#)
 
 # Mycila Guice Extensions #
 
 This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
+
+<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
+
+## Build Status ##
+
+[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
 
 ## Maven Repository ##
 
@@ -25,10 +30,6 @@ Available in Maven Central Repository: http://repo1.maven.org/maven2/com/mycila/
  - __Snapshots__
  
 Available in OSS Repository:  https://oss.sonatype.org/content/repositories/snapshots/com/mycila/guice/extensions/
-
-## Build Status ##
-
-[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
 
 ## Extensions ##
 
@@ -244,38 +245,38 @@ Then load your `Injector` with the `ServiceModule`:
 
 This will also add the two other module in your `Injector`.
 
-___Loading custom implementation from the classpath___
+___Loading custom implementations from the classpath___
 
 
 You can also bind an interface to one or several implementations discovered on the classpath by using the providers `SingleServiceProvider` or `MultiServiceProvider`.  
 
     bind(MyService.class).toProvider(new SingleServiceProvider<>(Service.class));
+
+Or to bind all discovered implementations to an array: 
+
     bind(MyService[].class).toProvider(new MultiServiceProvider<>(Service.class));
 
 Just put on your classpath the file `META-INF/services/my.package.MyService` and the list of implementations in it.
 
 ### 6. Web Extensions ###
 
+This extension facilitate the setup of a Guice environment within a web application.
+
+__Maven dependency__
+
+    <dependency>
+        <groupId>com.mycila.guice.extensions</groupId>
+        <artifactId>mycila-guice-web</artifactId>
+        <version>X.Y.ga</version>
+    </dependency>
+
+__Usage__
+
+Just declare the `MycilaGuiceListener` as a listener in your `web.xml` file. The listener automatically creates a Guice injector by using the [Service and Module discovery extension](#5-service-and-module-discovery).
+
+    <listener>
+        <listener-class>com.mycila.guice.ext.web.MycilaGuiceListener</listener-class>
+    </listener>
 
 
-
-== Service Loader ==
-
-{{{
-binder.bind(AgentPlugin[].class)
-    .toProvider(ServiceLoaderProvider.of(AgentPlugin.class).withClassLoader(ClassLoader.class))
-    .in(Cached20Seconds.class);
-}}}
-
-This binding creates in a cached scope for 20 seconds a list of AgentPlugin instances on the classpath, loaded by the JDK ServiceLoader (META-INF/services/...). When loaded, each service will be injected with its dependencies.
-
-*or*
-
-{{{
-install(ServiceLoaderModule.withClassLoader(ClassLoader.class).of(AgentPlugin.class));
-}}}
-
-In this case. the module creates a binding of key `Set<AgentPlugin>` containing all loaded and injected instances from the META-INF/services definitions.
-
-`withClassLoader` is optional and takes as parameter the KEY of the binding where to get the classloader. In my case, i have a binding of type ClassLoader which points to the ClassLaoder instance i want to use to discover the services.
 
