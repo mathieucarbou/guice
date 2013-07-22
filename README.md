@@ -11,6 +11,7 @@
 		- [5. Service and Module discovery](#5-service-and-module-discovery)
 		- [6. Web Extensions](#6-web-extensions)
 		- [7. Groovy Extensions](#7-groovy-extensions)
+		- [8. Servlet Extension](#8-servlet-extension)
 
 # Mycila Guice Extensions #
 
@@ -318,3 +319,15 @@ Than you can now in your code execute:
     Book b = Book.findById('123')
     // [...]
     b.save()
+
+### 8. Servlet Extension ###
+
+Same code as the official Google Guice Servlet Extension, but do not depend on internal Guice stuff but on external Guava dependency instead.  
+
+__Maven dependency__
+
+    <dependency>
+        <groupId>com.mycila.guice.extensions</groupId>
+        <artifactId>mycila-guice-servlet</artifactId>
+        <version>X.Y.ga</version>
+    </dependency>
