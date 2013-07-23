@@ -58,6 +58,11 @@
             <artifactId>junit-dep</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ovea.tajin.servers</groupId>
+            <artifactId>tajin-server-jetty9</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

@@ -219,7 +219,7 @@ public class MycilaInitDestroyBindingsTest {
             @Override
             protected void configure() {
                 bind(TestSingleton.class).toProvider(testProvider1);
-                bind(SomeInterface.class).toProvider(testProvider2);
+                bind(SomeInterface.class).toProvider(testProvider2).in(Singleton.class);
             }
         }).getInstance(CloseableInjector.class);
 
@@ -233,7 +233,7 @@ public class MycilaInitDestroyBindingsTest {
         injector.close();
 
         assertEquals(1, testProvider1.initialized);
-        assertEquals(1, testProvider1.destroyed);
+        assertEquals(0, testProvider1.destroyed);
         assertEquals(1, testProvider2.initialized);
         assertEquals(1, testProvider2.destroyed);
     }

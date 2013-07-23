@@ -34,6 +34,10 @@ public class MycilaGuiceListener extends GuiceServletContextListener {
 
     private final Module[] modules;
 
+    public MycilaGuiceListener() {
+        this.modules = new Module[0];
+    }
+
     public MycilaGuiceListener(Module... modules) {
         this.modules = modules;
     }
@@ -45,9 +49,9 @@ public class MycilaGuiceListener extends GuiceServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        CloseableInjector injector = (CloseableInjector) servletContextEvent.getServletContext().getAttribute(Injector.class.getName());
+        Injector injector = (Injector) servletContextEvent.getServletContext().getAttribute(Injector.class.getName());
         if (injector != null) {
-            injector.close();
+            injector.getInstance(CloseableInjector.class).close();
         }
         super.contextDestroyed(servletContextEvent);
     }

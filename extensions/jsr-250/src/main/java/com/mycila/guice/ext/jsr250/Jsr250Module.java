@@ -27,10 +27,8 @@ import com.google.inject.Scope;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
-import com.google.inject.spi.BindingScopingVisitor;
 import com.google.inject.spi.Dependency;
 import com.google.inject.spi.HasDependencies;
-import com.google.inject.spi.InstanceBinding;
 import com.google.inject.spi.ProviderInstanceBinding;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.InjectorCloseListener;
@@ -41,7 +39,6 @@ import com.mycila.guice.ext.injection.Reflect;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashSet;
@@ -96,7 +93,7 @@ public class Jsr250Module extends AbstractModule {
             }
             Map<Object, Object> done = new IdentityHashMap<>(bindings.size());
             for (final Binding<?> binding : bindings.values())
-                if (SingletonChecker.isSingleton(binding)) {
+                if (Scopes.isSingleton(binding)) {
                     close(binding, done, dependants);
                 }
             for (Scope scope : injector.getScopeBindings().values())
@@ -116,7 +113,7 @@ public class Jsr250Module extends AbstractModule {
                             preDestroy(o);
                             done.put(o, Void.TYPE);
                         }
-                    } else if (SingletonChecker.isSingleton(binding)) {
+                    } else if (Scopes.isSingleton(binding)) {
                         Object o = binding.getProvider().get();
                         if (!done.containsKey(o)) {
                             preDestroy(o);
@@ -134,39 +131,6 @@ public class Jsr250Module extends AbstractModule {
             for (Method method : Reflect.findAllAnnotatedMethods(type.getRawType(), PreDestroy.class)) {
                 destroyer.handle(type, instance, method, method.getAnnotation(PreDestroy.class));
             }
-        }
-    }
-
-    static class SingletonChecker implements BindingScopingVisitor<Boolean> {
-
-        private final Binding<?> binding;
-
-        private SingletonChecker(Binding<?> binding) {
-            this.binding = binding;
-        }
-
-        @Override
-        public Boolean visitEagerSingleton() {
-            return true;
-        }
-
-        @Override
-        public Boolean visitScope(Scope scope) {
-            return false;
-        }
-
-        @Override
-        public Boolean visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-            return false;
-        }
-
-        @Override
-        public Boolean visitNoScoping() {
-            return binding instanceof ProviderInstanceBinding<?> || binding instanceof InstanceBinding<?>;
-        }
-
-        static boolean isSingleton(Binding<?> binding) {
-            return Scopes.isSingleton(binding) || binding.acceptScopingVisitor(new SingletonChecker(binding));
         }
     }
 

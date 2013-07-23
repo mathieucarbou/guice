@@ -25,9 +25,6 @@ import com.google.inject.Provider;
 import com.google.inject.Scope;
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
-import com.google.inject.spi.BindingScopingVisitor;
-import com.google.inject.spi.InstanceBinding;
-import com.google.inject.spi.ProviderInstanceBinding;
 import com.google.inject.spi.TypeConverterBinding;
 
 import java.lang.annotation.Annotation;
@@ -53,7 +50,7 @@ final class MycilaCloseableInjector implements CloseableInjector {
             Injector current = injector;
             injector = null;
             for (Binding<?> binding : current.getAllBindings().values()) {
-                if (SingletonChecker.isSingleton(binding)) {
+                if (Scopes.isSingleton(binding)) {
                     Object o = binding.getProvider().get();
                     if (o instanceof InjectorCloseListener) {
                         ((InjectorCloseListener) o).onInjectorClosing();
@@ -156,39 +153,6 @@ final class MycilaCloseableInjector implements CloseableInjector {
     @Override
     public Set<TypeConverterBinding> getTypeConverterBindings() {
         return injector().getTypeConverterBindings();
-    }
-
-    static class SingletonChecker implements BindingScopingVisitor<Boolean> {
-
-        private final Binding<?> binding;
-
-        private SingletonChecker(Binding<?> binding) {
-            this.binding = binding;
-        }
-
-        @Override
-        public Boolean visitEagerSingleton() {
-            return true;
-        }
-
-        @Override
-        public Boolean visitScope(Scope scope) {
-            return false;
-        }
-
-        @Override
-        public Boolean visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-            return false;
-        }
-
-        @Override
-        public Boolean visitNoScoping() {
-            return binding instanceof ProviderInstanceBinding<?> || binding instanceof InstanceBinding<?>;
-        }
-
-        static boolean isSingleton(Binding<?> binding) {
-            return Scopes.isSingleton(binding) || binding.acceptScopingVisitor(new SingletonChecker(binding));
-        }
     }
 
 }
