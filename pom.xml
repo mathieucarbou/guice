@@ -11,7 +11,7 @@
 
     <groupId>com.mycila.guice.extensions</groupId>
     <artifactId>mycila-guice-extensions</artifactId>
-    <version>3.0.rc1-SNAPSHOT</version>
+    <version>3.0.rc1</version>
     <packaging>pom</packaging>
 
     <name>Mycila Guice Extensions</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git@github.com:mycila/guice.git</connection>
         <developerConnection>scm:git:git@github.com:mycila/guice.git</developerConnection>
         <url>http://github.com/mycila/guice</url>
-        <tag>HEAD</tag>
+        <tag>mycila-guice-extensions-3.0.rc1</tag>
     </scm>
 
     <modules>
