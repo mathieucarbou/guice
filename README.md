@@ -1,4 +1,4 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents**
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
 	- [Build Status](#build-status)
@@ -17,11 +17,10 @@
 
 This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
 
+- __Build Status:__ [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
+- __Issues:__ https://github.com/mycila/guice/issues
+
 <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
-
-## Build Status ##
-
-[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
 
 ## Maven Repository ##
 
