@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <name>Mycila Guice Extensions</name>
-    <url>https://github.com/mycila/guice</url>
+    <url>http://mycila.github.io/guice</url>
     <inceptionYear>2010</inceptionYear>
 
     <scm>
