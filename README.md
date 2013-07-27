@@ -330,3 +330,7 @@ __Maven dependency__
         <artifactId>mycila-guice-servlet</artifactId>
         <version>X.Y.ga</version>
     </dependency>
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/guice/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
