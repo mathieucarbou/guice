@@ -17,10 +17,9 @@
 
 This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
 
-- __Build Status:__ [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
-- __Issues:__ https://github.com/mycila/guice/issues
+__Issues:__ https://github.com/mycila/guice/issues
 
-<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
+<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img> [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/guice/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Maven Repository ##
 
@@ -330,7 +329,4 @@ __Maven dependency__
         <artifactId>mycila-guice-servlet</artifactId>
         <version>X.Y.ga</version>
     </dependency>
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/guice/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
