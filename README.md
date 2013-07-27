@@ -19,7 +19,10 @@ This project contains a set of Google Guice Extensions useful in every-days deve
 
 __Issues:__ https://github.com/mycila/guice/issues
 
-<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img> [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/guice/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/1875760f595bd5c7cb70197871c0d854 "githalytics.com")](http://githalytics.com/mycila/guice)
+<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
+[![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/guice/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/1875760f595bd5c7cb70197871c0d854 "githalytics.com")](http://githalytics.com/mycila/guice)
 
 ## Maven Repository ##
 
