@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.mycila.guice</groupId>
         <artifactId>mycila-guice</artifactId>
-        <version>3.2.ga-SNAPSHOT</version>
+        <version>3.2.ga</version>
         <relativePath>..</relativePath>
     </parent>
 
@@ -59,7 +59,7 @@
                         </includes>
                     </artifactSet>
                     <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                     </transformers>
                 </configuration>
             </plugin>
