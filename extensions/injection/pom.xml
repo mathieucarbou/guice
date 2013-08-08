@@ -23,11 +23,11 @@
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
         <version>3.2.ga-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>mycila-guice-injection</artifactId>
-    <name>Mycila Guice Extensions :: Injection</name>
+    <name>Mycila Guice :: Extensions :: Injection</name>
     <packaging>jar</packaging>
 
     <properties>

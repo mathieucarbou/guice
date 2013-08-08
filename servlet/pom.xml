@@ -20,18 +20,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mycila.guice.extensions</groupId>
-        <artifactId>mycila-guice-extensions</artifactId>
+        <groupId>com.mycila.guice</groupId>
+        <artifactId>mycila-guice</artifactId>
         <version>3.2.ga-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>mycila-guice-jsr250</artifactId>
-    <name>Mycila Guice Extensions :: JSR-250</name>
+    <groupId>com.mycila.guice</groupId>
+    <artifactId>guice-servlet</artifactId>
     <packaging>jar</packaging>
 
+    <name>Mycila Guice :: Guice Servlet</name>
+
     <properties>
-        <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.jsr250*;version="${project.version}";-noimport:=true</osgi.export>
+        <osgi.export>com.google.inject.servlet*;version="${project.version}";-noimport:=true</osgi.export>
     </properties>
 
     <build>
@@ -52,12 +54,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-injection</artifactId>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-guice</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-closeable</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

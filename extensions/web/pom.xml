@@ -23,11 +23,11 @@
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
         <version>3.2.ga-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>mycila-guice-web</artifactId>
-    <name>Mycila Guice Extensions :: Web</name>
+    <name>Mycila Guice :: Extensions :: Web</name>
     <packaging>jar</packaging>
 
     <properties>
@@ -60,8 +60,8 @@
             <artifactId>mycila-guice-closeable</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.mycila.guice.extensions</groupId>
-            <artifactId>mycila-guice-servlet</artifactId>
+            <groupId>com.mycila.guice</groupId>
+            <artifactId>guice-servlet</artifactId>
         </dependency>
 
         <dependency>

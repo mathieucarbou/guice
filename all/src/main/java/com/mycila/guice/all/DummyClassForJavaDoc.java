@@ -13,31 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mycila.guice.ext.jsr250;
-
-import javax.annotation.Resource;
-import javax.inject.Named;
-import javax.inject.Provider;
+package com.mycila.guice.all;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
+ * @date 2013-08-13
  */
-public class Account {
-
-    @Resource
-    Bank bank;
-
-    String number;
-
-    @Resource
-    void init(Client client, @Named("RNG") Provider<Id> rng) {
-        number = bank.id() + "" + client.id() + "" + rng.get().id();
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    void close() {
-    }
+public final class DummyClassForJavaDoc {
 }

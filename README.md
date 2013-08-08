@@ -1,7 +1,6 @@
-**Table of Contents**
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
-	- [Build Status](#build-status)
 	- [Maven Repository](#maven-repository)
 	- [Extensions](#extensions)
 		- [1. Customizes injection annotations](#1-customizes-injection-annotations)
@@ -12,6 +11,7 @@
 		- [6. Web Extensions](#6-web-extensions)
 		- [7. Groovy Extensions](#7-groovy-extensions)
 		- [8. Servlet Extension](#8-servlet-extension)
+	- [Get everything in one package](#get-everything-in-one-package)
 
 # Mycila Guice Extensions #
 
@@ -320,15 +320,28 @@ Than you can now in your code execute:
 
 ### 8. Servlet Extension ###
 
-Same code as the official Google Guice Servlet Extension, but do not depend on internal Guice stuff but on external Guava dependency instead.  
+This is not an extension but a repackaging
+
+Same code as the official Google Guice Servlet Extension, but do not depend on internal Guice stuff but on external Guava dependency instead.
 
 __Maven dependency__
 
     <dependency>
-        <groupId>com.mycila.guice.extensions</groupId>
-        <artifactId>mycila-guice-servlet</artifactId>
+        <groupId>com.mycila.guice</groupId>
+        <artifactId>guice-servlet</artifactId>
         <version>X.Y.ga</version>
     </dependency>
 
+## Get everything in one package ##
+
+If you want to get all extensions at once (but you may end up with more dependencies that you may want, so you might need to exclude some), then you can depend on:
+
+    <dependency>
+        <groupId>com.mycila.guice</groupId>
+        <artifactId>mycila-guice-all</artifactId>
+        <version>X.Y.ga</version>
+    </dependency>
+
+__WARNING__: Mycile Guice Servlet, the repackaging of Guice Servlet, which is now using the external Guava dependency, is included in the `-all` package.
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/1875760f595bd5c7cb70197871c0d854 "githalytics.com")](http://githalytics.com/mycila/guice)

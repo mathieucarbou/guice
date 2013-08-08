@@ -26,12 +26,12 @@
         <relativePath>../pom</relativePath>
     </parent>
 
-    <groupId>com.mycila.guice.extensions</groupId>
-    <artifactId>mycila-guice-extensions</artifactId>
+    <groupId>com.mycila.guice</groupId>
+    <artifactId>mycila-guice</artifactId>
     <version>3.2.ga-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Mycila Guice Extensions</name>
+    <name>Mycila Guice</name>
     <inceptionYear>2010</inceptionYear>
     <url>http://mycila.github.io/${mycila.github.name}</url>
 
@@ -47,21 +47,27 @@
     </scm>
 
     <modules>
-        <module>extensions/closeable</module>
-        <module>extensions/groovy</module>
-        <module>extensions/injection</module>
-        <module>extensions/jsr-250</module>
-        <module>extensions/legacy</module>
-        <module>extensions/servlet</module>
-        <module>extensions/service</module>
-        <module>extensions/web</module>
+        <module>servlet</module>
+        <module>extensions</module>
+        <module>all</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.mycila.guice</groupId>
+                <artifactId>guice-servlet</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.mycila.guice.extensions</groupId>
                 <artifactId>mycila-guice-closeable</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-groovy</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -76,12 +82,18 @@
             </dependency>
             <dependency>
                 <groupId>com.mycila.guice.extensions</groupId>
-                <artifactId>mycila-guice-service</artifactId>
+                <artifactId>mycila-guice-legacy</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.mycila.guice.extensions</groupId>
-                <artifactId>mycila-guice-servlet</artifactId>
+                <artifactId>mycila-guice-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mycila.guice.extensions</groupId>
+                <artifactId>mycila-guice-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
