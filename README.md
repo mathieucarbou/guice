@@ -21,7 +21,7 @@ This project contains a set of Google Guice Extensions useful in every-days deve
  - __OSGi Compliant:__ <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
  - __Build status:__ [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
 
-__LATEST RELEASE:__ `3.2.ga`
+__LATEST RELEASE:__ `3.3.ga`
 
 ## Maven Repository ##
 
@@ -344,6 +344,6 @@ If you want to get all extensions at once (but you may end up with more dependen
         <version>X.Y.ga</version>
     </dependency>
 
-__WARNING__: Mycile Guice Servlet, the repackaging of Guice Servlet, which is now using the external Guava dependency, is included in the `-all` package.
+Note: the `-all` package depends on the repackaging version of Google Guice Servlet
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/1875760f595bd5c7cb70197871c0d854 "githalytics.com")](http://githalytics.com/mycila/guice)

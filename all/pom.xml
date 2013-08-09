@@ -39,7 +39,6 @@
             com.mycila.guice.ext.injection*;version="${project.version}";-noimport:=true,
             com.mycila.guice.ext.groovy*;version="${project.version}";-noimport:=true,
             com.mycila.guice.ext.closeable*;version="${project.version}";-noimport:=true,
-            com.google.inject.servlet*;version="${project.version}";-noimport:=true
         </osgi.export>
     </properties>
 
@@ -55,7 +54,6 @@
                     <artifactSet>
                         <includes>
                             <include>com.mycila.guice.extensions:*</include>
-                            <include>com.mycila.guice:*</include>
                         </includes>
                     </artifactSet>
                     <transformers>
@@ -105,11 +103,6 @@
         <dependency>
             <groupId>com.mycila.guice.extensions</groupId>
             <artifactId>mycila-guice-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mycila.guice</groupId>
-            <artifactId>guice-servlet</artifactId>
         </dependency>
     </dependencies>
 
