@@ -125,7 +125,7 @@ __Maven dependency__
 
     <dependency>
         <groupId>com.mycila.guice.extensions</groupId>
-        <artifactId>mycila-guice-closeable</artifactId>
+        <artifactId>mycila-guice-jsr250</artifactId>
         <version>X.Y.ga</version>
     </dependency>
 
