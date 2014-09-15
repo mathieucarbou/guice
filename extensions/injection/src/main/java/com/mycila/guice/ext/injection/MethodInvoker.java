@@ -23,11 +23,7 @@ import com.google.inject.internal.cglib.core.$CodeGenerationException;
 import com.google.inject.internal.cglib.reflect.$FastMethod;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -87,7 +83,7 @@ public class MethodInvoker implements Member, AnnotatedElement {
 
     @Override
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
-        return method.isAnnotationPresent(annotationClass);
+        return Reflect.isAnnotationPresent(method, annotationClass);
     }
 
     @Override

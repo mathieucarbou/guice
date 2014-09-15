@@ -15,15 +15,7 @@
  */
 package com.mycila.guice.ext.injection;
 
-import com.google.inject.Binder;
-import com.google.inject.Key;
-import com.google.inject.MembersInjector;
-import com.google.inject.Module;
-import com.google.inject.PrivateBinder;
-import com.google.inject.Provider;
-import com.google.inject.Scope;
-import com.google.inject.Stage;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.AnnotatedConstantBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
@@ -120,11 +112,6 @@ public class MBinder implements Binder {
     }
 
     @Override
-    public void bindListener(Matcher<? super Key<?>> keyMatcher, ProvisionListener... listeners) {
-        binder.bindListener(keyMatcher, listeners);
-    }
-
-    @Override
     public void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher, TypeListener listener) {
         binder.bindListener(typeMatcher, listener);
     }
@@ -209,4 +196,18 @@ public class MBinder implements Binder {
         return binder.withSource(source);
     }
 
+    @Override
+    public void bindListener(Matcher<? super Binding<?>> bindingMatcher, ProvisionListener... listeners) {
+        binder.bindListener(bindingMatcher, listeners);
+    }
+
+    @Override
+    public void requireAtInjectOnConstructors() {
+        binder.requireAtInjectOnConstructors();
+    }
+
+    @Override
+    public void requireExactBindingAnnotations() {
+        binder.requireExactBindingAnnotations();
+    }
 }

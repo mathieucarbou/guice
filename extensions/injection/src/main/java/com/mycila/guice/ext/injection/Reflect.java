@@ -31,10 +31,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import static com.google.common.collect.Iterables.concat;
@@ -46,6 +43,83 @@ import static java.util.Arrays.asList;
  * @date 2013-07-20
  */
 public class Reflect {
+
+    private static final Function<Signature, Method> TO_METHOD = new Function<Signature, Method>() {
+        @Override
+        public Method apply(Signature from) {
+            return from.method;
+        }
+    };
+
+    private static final List<Signature> OBJECT_METHODS = Lists.newArrayList(transform(asList(Object.class.getDeclaredMethods()), new Function<Method, Signature>() {
+        @Override
+        public Signature apply(Method from) {
+            return new Signature(from);
+        }
+    }));
+
+    private static Key<?> buildKey(TypeLiteral<?> type, Annotation[] annotations) {
+        for (Annotation annotation : annotations)
+            if (Annotations.isBindingAnnotation(annotation.annotationType()))
+                return Key.get(type, annotation);
+        return Key.get(type);
+    }
+
+    private static final LoadingCache<AnnotatedElement, Set<Class<? extends Annotation>>> ANNOT_CACHE = CacheBuilder.newBuilder()
+        .weakKeys()
+        .softValues()
+        .build(new CacheLoader<AnnotatedElement, Set<Class<? extends Annotation>>>() {
+            @Override
+            public Set<Class<? extends Annotation>> load(AnnotatedElement e) throws Exception {
+                Annotation[] annotations = e.getDeclaredAnnotations();
+                Set<Class<? extends Annotation>> annotationTypes = new HashSet<Class<? extends Annotation>>(annotations.length);
+                for (Annotation annotation : annotations) {
+                    annotationTypes.add(annotation.annotationType());
+                }
+                return annotationTypes;
+            }
+        });
+
+    private static final LoadingCache<Class<?>, List<Signature>> METHODS = CacheBuilder.newBuilder()
+        .weakKeys()
+        .softValues()
+        .build(new CacheLoader<Class<?>, List<Signature>>() {
+            @Override
+            public List<Signature> load(Class<?> clazz) throws Exception {
+                List<Signature> sup;
+                Class<?> sc = clazz.getSuperclass();
+                if (sc == null)
+                    sup = Collections.emptyList();
+                else if (sc == Object.class)
+                    sup = OBJECT_METHODS;
+                else
+                    sup = METHODS.get(sc);
+                Method[] methods = clazz.isInterface() ? clazz.getMethods() : clazz.getDeclaredMethods();
+                final List<Signature> thisMethods = new ArrayList<>(methods.length);
+                for (Method method : methods) {
+                    if (!(method.isSynthetic() || method.isBridge())) {
+                        thisMethods.add(new Signature(method));
+                    }
+                }
+                return Lists.newLinkedList(concat(thisMethods, Iterables.filter(sup, new Predicate<Signature>() {
+                    @Override
+                    public boolean apply(Signature input) {
+                        int pos = thisMethods.indexOf(input);
+                        if (pos == -1) return true;
+                        Signature override = thisMethods.get(pos);
+                        return !overrides(override.method, input.method);
+                    }
+                })));
+            }
+        });
+
+    public static boolean isAnnotationPresent(AnnotatedElement annotatedElement, Class<? extends Annotation> annotationType) {
+        try {
+            return ANNOT_CACHE.get(annotatedElement).contains(annotationType);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
 
     public static List<Key<?>> getParameterKeys(TypeLiteral<?> type, Method method) {
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
@@ -105,7 +179,7 @@ public class Reflect {
         return new Predicate<T>() {
             @Override
             public boolean apply(T element) {
-                return element.isAnnotationPresent(annotationType);
+                return Reflect.isAnnotationPresent(element, annotationType);
             }
         };
     }
@@ -127,53 +201,6 @@ public class Reflect {
         };
     }
 
-    private static final Function<Signature, Method> TO_METHOD = new Function<Signature, Method>() {
-        @Override
-        public Method apply(Signature from) {
-            return from.method;
-        }
-    };
-
-    private static final List<Signature> OBJECT_METHODS = Lists.newArrayList(transform(asList(Object.class.getDeclaredMethods()), new Function<Method, Signature>() {
-        @Override
-        public Signature apply(Method from) {
-            return new Signature(from);
-        }
-    }));
-
-    private static final LoadingCache<Class<?>, List<Signature>> METHODS = CacheBuilder.newBuilder()
-        .weakKeys()
-        .softValues()
-        .build(new CacheLoader<Class<?>, List<Signature>>() {
-            @Override
-            public List<Signature> load(Class<?> clazz) throws Exception {
-                List<Signature> sup;
-                Class<?> sc = clazz.getSuperclass();
-                if (sc == null)
-                    sup = Collections.emptyList();
-                else if (sc == Object.class)
-                    sup = OBJECT_METHODS;
-                else
-                    sup = METHODS.get(sc);
-                Method[] methods = clazz.isInterface() ? clazz.getMethods() : clazz.getDeclaredMethods();
-                final List<Signature> thisMethods = new ArrayList<>(methods.length);
-                for (Method method : methods) {
-                    if (!(method.isSynthetic() || method.isBridge())) {
-                        thisMethods.add(new Signature(method));
-                    }
-                }
-                return Lists.newLinkedList(concat(thisMethods, Iterables.filter(sup, new Predicate<Signature>() {
-                    @Override
-                    public boolean apply(Signature input) {
-                        int pos = thisMethods.indexOf(input);
-                        if (pos == -1) return true;
-                        Signature override = thisMethods.get(pos);
-                        return !overrides(override.method, input.method);
-                    }
-                })));
-            }
-        });
-
     /**
      * Returns true if a overrides b. Assumes signatures of a and b are the same and a's declaring
      * class is a subclass of b's declaring class.
@@ -189,13 +216,6 @@ public class Reflect {
         }
         // b must be package-private
         return a.getDeclaringClass().getPackage().equals(b.getDeclaringClass().getPackage());
-    }
-
-    private static Key<?> buildKey(TypeLiteral<?> type, Annotation[] annotations) {
-        for (Annotation annotation : annotations)
-            if (Annotations.isBindingAnnotation(annotation.annotationType()))
-                return Key.get(type, annotation);
-        return Key.get(type);
     }
 
     private static final class Signature {
@@ -239,4 +259,5 @@ public class Reflect {
             return true;
         }
     }
+
 }
