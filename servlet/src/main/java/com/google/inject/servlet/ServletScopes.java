@@ -148,7 +148,7 @@ public class ServletScopes {
      * HTTP request in another thread. This acts as a way of transporting
      * request context data from the request processing thread to to worker
      * threads.
-     * <p/>
+     *
      * There are some limitations:
      * <ul>
      * <li>Derived objects (i.e. anything marked @RequestScoped will not be

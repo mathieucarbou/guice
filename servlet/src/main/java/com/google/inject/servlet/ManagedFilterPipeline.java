@@ -18,20 +18,9 @@ package com.google.inject.servlet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.inject.Binding;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
@@ -71,7 +60,7 @@ class ManagedFilterPipeline implements FilterPipeline {
     /**
      * Introspects the injector and collects all instances of bound {@code List<FilterDefinition>}
      * into a master list.
-     * <p/>
+     *
      * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
      * that preserves insertion order in entry-set iterators.
      */
@@ -124,11 +113,11 @@ class ManagedFilterPipeline implements FilterPipeline {
     /**
      * Used to create an proxy that dispatches either to the guice-servlet pipeline or the regular
      * pipeline based on uri-path match. This proxy also provides minimal forwarding support.
-     * <p/>
+     *
      * We cannot forward from a web.xml Servlet/JSP to a guice-servlet (because the filter pipeline
      * is not called again). However, we can wrap requests with our own dispatcher to forward the
      * *other* way. web.xml Servlets/JSPs can forward to themselves as per normal.
-     * <p/>
+     *
      * This is not a problem cuz we intend for people to migrate from web.xml to guice-servlet,
      * incrementally, but not the other way around (which, we should actively discourage).
      */

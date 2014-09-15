@@ -17,7 +17,7 @@ package com.mycila.guice.all;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-08-13
+ * date 2013-08-13
  */
 public final class DummyClassForJavaDoc {
 }

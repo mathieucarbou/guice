@@ -40,7 +40,7 @@ import static java.util.Arrays.asList;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-20
+ * date 2013-07-20
  */
 public class Reflect {
 

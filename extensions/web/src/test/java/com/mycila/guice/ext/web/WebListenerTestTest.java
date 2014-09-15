@@ -24,7 +24,7 @@ import org.junit.runners.JUnit4;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-22
+ * date 2013-07-22
  */
 @RunWith(JUnit4.class)
 public final class WebListenerTestTest {

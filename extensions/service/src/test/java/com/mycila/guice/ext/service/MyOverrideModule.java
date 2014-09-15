@@ -19,7 +19,7 @@ import com.google.inject.AbstractModule;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 @OverrideModule
 public final class MyOverrideModule extends AbstractModule {

@@ -28,7 +28,7 @@ import javax.servlet.ServletContextEvent;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-01-30
+ * date 2013-01-30
  */
 public class MycilaGuiceListener extends GuiceServletContextListener {
 

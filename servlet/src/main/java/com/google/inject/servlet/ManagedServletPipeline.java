@@ -19,17 +19,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.inject.Binding;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -61,7 +53,7 @@ class ManagedServletPipeline {
     /**
      * Introspects the injector and collects all instances of bound {@code List<ServletDefinition>}
      * into a master list.
-     * <p/>
+     *
      * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
      * that preserves insertion order in entry-set iterators.
      */

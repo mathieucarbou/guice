@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 
 /**
  * A visitor for the servlet extension.
- * <p/>
+ *
  * If your {@link BindingTargetVisitor} implements this interface, bindings created by using
  * {@link ServletModule} will be visited through this interface.
  *
@@ -36,7 +36,7 @@ public interface ServletModuleTargetVisitor<T, V> extends BindingTargetVisitor<T
     /**
      * Visits a filter binding created by {@link ServletModule#filter}, where
      * {@link FilterKeyBindingBuilder#through} is called with a Class or Key.
-     * <p/>
+     *
      * If multiple patterns were specified, this will be called multiple times.
      */
     V visit(LinkedFilterBinding binding);
@@ -44,7 +44,7 @@ public interface ServletModuleTargetVisitor<T, V> extends BindingTargetVisitor<T
     /**
      * Visits a filter binding created by {@link ServletModule#filter} where
      * {@link FilterKeyBindingBuilder#through} is called with a {@link Filter}.
-     * <p/>
+     *
      * If multiple patterns were specified, this will be called multiple times.
      */
     V visit(InstanceFilterBinding binding);
@@ -52,7 +52,7 @@ public interface ServletModuleTargetVisitor<T, V> extends BindingTargetVisitor<T
     /**
      * Visits a servlet binding created by {@link ServletModule#serve} where
      * {@link ServletKeyBindingBuilder#with}, is called with a Class or Key.
-     * <p/>
+     *
      * If multiple patterns were specified, this will be called multiple times.
      */
     V visit(LinkedServletBinding binding);
@@ -60,7 +60,7 @@ public interface ServletModuleTargetVisitor<T, V> extends BindingTargetVisitor<T
     /**
      * Visits a servlet binding created by {@link ServletModule#serve} where
      * {@link ServletKeyBindingBuilder#with}, is called with an {@link HttpServlet}.
-     * <p/>
+     *
      * If multiple patterns were specified, this will be called multiple times.
      */
     V visit(InstanceServletBinding binding);

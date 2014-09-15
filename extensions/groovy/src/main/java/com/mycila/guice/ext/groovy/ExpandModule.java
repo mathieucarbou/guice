@@ -20,7 +20,7 @@ import com.mycila.guice.ext.injection.MBinder;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 public class ExpandModule extends AbstractModule {
     @Override

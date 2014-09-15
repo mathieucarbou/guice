@@ -18,13 +18,7 @@ package com.google.inject.servlet;
 import com.google.inject.Inject;
 import com.google.inject.OutOfScopeException;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -32,7 +26,7 @@ import java.lang.ref.WeakReference;
 import java.util.logging.Logger;
 
 /**
- * <p/>
+ *
  * Apply this filter in web.xml above all other filters (typically), to all requests where you plan
  * to use servlet scopes. This is also needed in order to dispatch requests to injectable filters
  * and servlets:

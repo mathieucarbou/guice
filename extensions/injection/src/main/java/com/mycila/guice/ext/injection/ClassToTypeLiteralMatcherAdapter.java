@@ -23,7 +23,7 @@ import java.lang.reflect.AnnotatedElement;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 public class ClassToTypeLiteralMatcherAdapter extends AbstractMatcher<TypeLiteral<?>> {
     private final Matcher<TypeLiteral<?>> m;

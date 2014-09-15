@@ -24,10 +24,10 @@ import java.io.IOException;
 /**
  * A Filter chain impl which basically passes itself to the "current" filter and iterates the chain
  * on {@code doFilter()}. Modeled on something similar in Apache Tomcat.
- * <p/>
+ *
  * Following this, it attempts to dispatch to guice-servlet's registered servlets using the
  * ManagedServletPipeline.
- * <p/>
+ *
  * And the end, it proceeds to the web.xml (default) servlet filter chain, if needed.
  *
  * @author Dhanji R. Prasanna

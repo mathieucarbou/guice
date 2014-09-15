@@ -17,7 +17,7 @@ package com.mycila.guice.ext.closeable;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 public interface InjectorCloseListener {
     void onInjectorClosing();

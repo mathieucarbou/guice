@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 @RunWith(JUnit4.class)
 public class TypeInfoTestTest {

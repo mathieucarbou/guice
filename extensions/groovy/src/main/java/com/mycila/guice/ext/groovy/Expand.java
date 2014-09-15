@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)

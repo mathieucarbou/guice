@@ -23,20 +23,12 @@ import com.google.inject.spi.BindingTargetVisitor;
 import com.google.inject.spi.ProviderInstanceBinding;
 import com.google.inject.spi.ProviderWithExtensionVisitor;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.inject.servlet.ManagedServletPipeline.REQUEST_DISPATCHER_REQUEST;
@@ -184,7 +176,7 @@ class ServletDefinition implements ProviderWithExtensionVisitor<ServletDefinitio
     /**
      * Utility that delegates to the actual service method of the servlet wrapped with a contextual
      * request (i.e. with correctly computed path info).
-     * <p/>
+     *
      * We need to suppress deprecation coz we use HttpServletRequestWrapper, which implements
      * deprecated API for backwards compatibility.
      */

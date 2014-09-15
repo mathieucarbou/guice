@@ -17,19 +17,15 @@ package com.google.inject.servlet;
 
 import com.google.inject.ImplementedBy;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import java.io.IOException;
 
 /**
  * An internal dispatcher for guice-servlet registered servlets and filters.
  * By default, we assume a Guice 1.0 style servlet module is in play. In other
  * words, we dispatch directly to the web.xml pipeline after setting up scopes.
- * <p/>
- * <p/>
+ *
+ *
  * If on the other hand, {@link ServletModule} is used to register managed
  * servlets and/or filters, then a different pipeline is bound instead. Which,
  * after dispatching to Guice-injected filters and servlets continues to the web.xml

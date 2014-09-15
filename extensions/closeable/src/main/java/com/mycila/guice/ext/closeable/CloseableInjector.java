@@ -19,7 +19,7 @@ import com.google.inject.Injector;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
- * @date 2013-07-21
+ * date 2013-07-21
  */
 public interface CloseableInjector extends Injector {
     void close();
