@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.mycila.guice.extensions</groupId>
         <artifactId>mycila-guice-extensions</artifactId>
-        <version>3.3.ga</version>
+        <version>3.4.ga-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
