@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 public final class LegacyProviderTest {
 
-    static List<Integer> seq = new LinkedList<>();
+    static List<Integer> seq = new LinkedList<Integer>();
 
     @Test
     public void test_legacy() throws Exception {

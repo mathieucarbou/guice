@@ -43,17 +43,17 @@ public class MBinder implements Binder {
     }
 
     public <A extends Annotation> MBinder bindAnnotationInjector(Class<A> annotationType, Class<? extends KeyProvider<A>> providerClass) {
-        binder.bindListener(Matchers.any(), willInject(new MemberInjectorTypeListener<>(annotationType, providerClass)));
+        binder.bindListener(Matchers.any(), willInject(new MemberInjectorTypeListener<A>(annotationType, providerClass)));
         return this;
     }
 
     public <A extends Annotation> MBinder handleMethodAfterInjection(Class<A> annotationType, Class<? extends MethodHandler<A>> providerClass) {
-        binder.bindListener(Matchers.any(), willInject(new MethodHandlerTypeListener<>(annotationType, providerClass)));
+        binder.bindListener(Matchers.any(), willInject(new MethodHandlerTypeListener<A>(annotationType, providerClass)));
         return this;
     }
 
     public <A extends Annotation> MBinder handleFieldAfterInjection(Class<A> annotationType, Class<? extends FieldHandler<A>> providerClass) {
-        binder.bindListener(Matchers.any(), willInject(new FieldHandlerTypeListener<>(annotationType, providerClass)));
+        binder.bindListener(Matchers.any(), willInject(new FieldHandlerTypeListener<A>(annotationType, providerClass)));
         return this;
     }
 

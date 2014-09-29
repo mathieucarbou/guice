@@ -15,11 +15,7 @@
  */
 package com.mycila.guice.ext.jsr250;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
-import com.google.inject.Stage;
+import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.CloseableModule;
@@ -41,11 +37,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -165,7 +157,7 @@ public class Jsr250Test {
     }
 
     static class Base {
-        static final List<String> calls = new ArrayList<>();
+        static final List<String> calls = new ArrayList<String>();
 
         @PreDestroy
         void close() {
@@ -218,7 +210,7 @@ public class Jsr250Test {
     }
 
     static class A {
-        static List<Integer> calls = new LinkedList<>();
+        static List<Integer> calls = new LinkedList<Integer>();
 
         @Inject
         void method(B b) {

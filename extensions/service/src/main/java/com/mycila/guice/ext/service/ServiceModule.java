@@ -40,8 +40,8 @@ public class ServiceModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        List<Module> runtime = new LinkedList<>();
-        List<Module> overrides = new LinkedList<>();
+        List<Module> runtime = new LinkedList<Module>();
+        List<Module> overrides = new LinkedList<Module>();
         for (Module module : ServiceLoader.load(Module.class, classLoader)) {
             if (module.getClass().isAnnotationPresent(OverrideModule.class))
                 overrides.add(module);

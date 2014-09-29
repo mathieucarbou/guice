@@ -45,7 +45,7 @@ public class MultiServiceProvider<T> implements Provider<T[]> {
 
     @Override
     public T[] get() {
-        List<T> instances = new LinkedList<>();
+        List<T> instances = new LinkedList<T>();
         for (T instance : ServiceLoader.load(type, classLoader)) {
             injector.injectMembers(instance);
             instances.add(instance);

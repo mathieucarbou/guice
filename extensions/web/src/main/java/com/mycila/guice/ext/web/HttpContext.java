@@ -33,7 +33,7 @@ public final class HttpContext {
     private static final ThreadLocal<Deque<HttpContext>> CTX = new ThreadLocal<Deque<HttpContext>>() {
         @Override
         protected Deque<HttpContext> initialValue() {
-            return new LinkedList<>();
+            return new LinkedList<HttpContext>();
         }
     };
 

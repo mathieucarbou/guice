@@ -26,7 +26,7 @@ import java.util.Map;
 public class ToStringBuilder {
 
     // Linked hash map ensures ordering.
-    final Map<String, Object> map = new LinkedHashMap<>();
+    final Map<String, Object> map = new LinkedHashMap<String, Object>();
 
     final String name;
 

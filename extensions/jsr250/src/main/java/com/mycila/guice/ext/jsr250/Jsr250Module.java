@@ -18,15 +18,7 @@ package com.mycila.guice.ext.jsr250;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.google.inject.AbstractModule;
-import com.google.inject.Binding;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.Scope;
-import com.google.inject.Scopes;
-import com.google.inject.Singleton;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.google.inject.spi.Dependency;
 import com.google.inject.spi.HasDependencies;
 import com.google.inject.spi.ProviderInstanceBinding;
@@ -40,11 +32,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -79,7 +67,7 @@ public class Jsr250Module extends AbstractModule {
             Multimap<Binding<?>, Binding<?>> dependants = Multimaps.newSetMultimap(new IdentityHashMap<Binding<?>, Collection<Binding<?>>>(), new Supplier<Set<Binding<?>>>() {
                 @Override
                 public Set<Binding<?>> get() {
-                    return new HashSet<>();
+                    return new HashSet<Binding<?>>();
                 }
             });
             for (Binding<?> binding : bindings.values()) {
@@ -91,7 +79,7 @@ public class Jsr250Module extends AbstractModule {
                     }
                 }
             }
-            Map<Object, Object> done = new IdentityHashMap<>(bindings.size());
+            Map<Object, Object> done = new IdentityHashMap<Object, Object>(bindings.size());
             for (final Binding<?> binding : bindings.values())
                 if (Scopes.isSingleton(binding)) {
                     close(binding, done, dependants);

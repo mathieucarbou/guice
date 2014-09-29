@@ -95,7 +95,7 @@ public class Reflect {
                 else
                     sup = METHODS.get(sc);
                 Method[] methods = clazz.isInterface() ? clazz.getMethods() : clazz.getDeclaredMethods();
-                final List<Signature> thisMethods = new ArrayList<>(methods.length);
+                final List<Signature> thisMethods = new ArrayList<Signature>(methods.length);
                 for (Method method : methods) {
                     if (!(method.isSynthetic() || method.isBridge())) {
                         thisMethods.add(new Signature(method));
@@ -124,7 +124,7 @@ public class Reflect {
     public static List<Key<?>> getParameterKeys(TypeLiteral<?> type, Method method) {
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
         List<TypeLiteral<?>> parameterTypes = type.getParameterTypes(method);
-        List<Key<?>> keys = new ArrayList<>(parameterTypes.size());
+        List<Key<?>> keys = new ArrayList<Key<?>>(parameterTypes.size());
         for (int i = 0; i < parameterTypes.size(); i++)
             keys.add(buildKey(parameterTypes.get(i), parameterAnnotations[i]));
         return keys;

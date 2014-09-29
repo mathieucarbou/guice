@@ -36,6 +36,7 @@
     <url>http://mycila.github.io/${mycila.github.name}</url>
 
     <properties>
+        <jdk.version>1.6</jdk.version>
         <mycila.github.name>guice</mycila.github.name>
     </properties>
 

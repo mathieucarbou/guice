@@ -68,7 +68,9 @@ public class MethodInvoker implements Member, AnnotatedElement {
     public Object invoke(Object target, Object... parameters) {
         try {
             return method.invoke(target, parameters);
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalAccessException e) {
+            throw MycilaGuiceException.toRuntime(e);
+        } catch (InvocationTargetException e) {
             throw MycilaGuiceException.toRuntime(e);
         }
     }

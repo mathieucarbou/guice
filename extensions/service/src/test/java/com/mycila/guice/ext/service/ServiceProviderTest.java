@@ -36,7 +36,7 @@ public class ServiceProviderTest {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                bind(Serv.class).toProvider(new SingleServiceProvider<>(Serv.class));
+                bind(Serv.class).toProvider(new SingleServiceProvider<Serv>(Serv.class));
             }
         });
         assertEquals(ServA.class, injector.getInstance(Serv.class).getClass());
@@ -47,7 +47,7 @@ public class ServiceProviderTest {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                bind(Serv2.class).toProvider(new SingleServiceProvider<>(Serv2.class).allowMissingImplementation());
+                bind(Serv2.class).toProvider(new SingleServiceProvider<Serv2>(Serv2.class).allowMissingImplementation());
             }
         });
         assertNull(injector.getInstance(Serv2.class));
@@ -58,7 +58,7 @@ public class ServiceProviderTest {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                bind(Serv[].class).toProvider(new MultiServiceProvider<>(Serv.class));
+                bind(Serv[].class).toProvider(new MultiServiceProvider<Serv>(Serv.class));
             }
         });
         Serv[] array = injector.getInstance(Serv[].class);
@@ -72,7 +72,7 @@ public class ServiceProviderTest {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                bind(Serv2[].class).toProvider(new MultiServiceProvider<>(Serv2.class));
+                bind(Serv2[].class).toProvider(new MultiServiceProvider<Serv2>(Serv2.class));
             }
         });
         Serv2[] array = injector.getInstance(Serv2[].class);

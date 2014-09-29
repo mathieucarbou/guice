@@ -47,7 +47,7 @@ public abstract class LegacyProvider<T> implements Provider<T> {
     }
 
     public LegacyProvider<T> inject(String methodName, Key<?>... paramKeys) {
-        return new MethodLegacyProvider<>(this, providedType, methodName, paramKeys);
+        return new MethodLegacyProvider<T>(this, providedType, methodName, paramKeys);
     }
 
     final Object[] getParameterValues(Injector injector) {
@@ -73,7 +73,7 @@ public abstract class LegacyProvider<T> implements Provider<T> {
     /* static ctors */
 
     public static <T> ConstructBuilder<T> of(Class<T> type) {
-        return new ConstructBuilder<>(type);
+        return new ConstructBuilder<T>(type);
     }
 
     private static Class<?>[] toClasses(Key<?>... keys) {
@@ -119,7 +119,7 @@ public abstract class LegacyProvider<T> implements Provider<T> {
         }
 
         public LegacyProvider<T> withConstructor(Key<?>... paramKeys) {
-            return new ConstructorLegacyProvider<>(type, paramKeys);
+            return new ConstructorLegacyProvider<T>(type, paramKeys);
         }
 
         public LegacyProvider<T> withFactory(Class<?> factoryType, String methodName, Class<?>... paramTypes) {
@@ -127,7 +127,7 @@ public abstract class LegacyProvider<T> implements Provider<T> {
         }
 
         public LegacyProvider<T> withFactory(Key<?> factoryType, String methodName, Key<?>... paramTypes) {
-            return new FactoryLegacyProvider<>(type, factoryType, methodName, paramTypes);
+            return new FactoryLegacyProvider<T>(type, factoryType, methodName, paramTypes);
         }
     }
 

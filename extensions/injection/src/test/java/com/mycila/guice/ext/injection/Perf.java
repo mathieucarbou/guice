@@ -48,7 +48,7 @@ public class Perf {
     }
 
     private static void perfTestMembers() throws Exception {
-        List<Class<?>> classes = new LinkedList<>();
+        List<Class<?>> classes = new LinkedList<Class<?>>();
         JarFile jarFile = new JarFile(new File("C:\\Program Files\\Java\\jdk1.7.0_15\\jre\\lib\\rt.jar"));
         Enumeration<JarEntry> enums = jarFile.entries();
         while (enums.hasMoreElements()) {
