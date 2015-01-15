@@ -17,6 +17,7 @@ package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.injection.MBinder;
@@ -46,13 +47,14 @@ import static org.junit.Assert.*;
 public class Jsr250Test {
 
     @Test
-    public void test_resource() throws Exception {
-        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule()).getInstance(ResClass.class);
-        assertEquals(2, ResClass.verified);
+    public void test_resource_with_type() throws Exception {
+        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule()).getInstance(Res1Class.class);
+        assertEquals(2, Res1Class.verified);
     }
 
-    static class ResClass {
+    static class Res1Class {
         static int verified;
+
         @Resource
         Injector injector;
 
@@ -73,6 +75,36 @@ public class Jsr250Test {
             assertNotNull(injector);
             assertNotNull(provider);
             assertSame(injector, provider.get());
+            verified++;
+        }
+    }
+
+    @Test
+    public void test_resource_with_name() throws Exception {
+        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(AA.class).annotatedWith(Names.named("aa1")).toInstance(new AA());
+                bind(AA.class).annotatedWith(Names.named("aa2")).toInstance(new AA());
+            }
+        }).getInstance(Res2Class.class);
+        assertEquals(1, Res2Class.verified);
+    }
+
+    static class Res2Class {
+        static int verified;
+
+        @Resource
+        AA aa1;
+
+        @Resource
+        AA aa2;
+
+        @PostConstruct
+        void init() {
+            assertNotNull(aa1);
+            assertNotNull(aa2);
+            assertTrue(aa1 != aa2);
             verified++;
         }
     }
