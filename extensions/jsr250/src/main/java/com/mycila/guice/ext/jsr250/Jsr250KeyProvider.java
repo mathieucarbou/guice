@@ -46,7 +46,7 @@ class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
             // implicit key
 
             // if no name given, try a combination with the field name
-            Key<?> implicitKey = Key.get(injectedType.getFieldType(injectedMember), Names.named(name));
+            Key<?> implicitKey = Key.get(injectedType.getFieldType(injectedMember), Names.named(injectedMember.getName()));
 
             if (injector.getExistingBinding(implicitKey) != null) {
                 return implicitKey;

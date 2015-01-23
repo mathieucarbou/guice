@@ -17,6 +17,7 @@ package com.mycila.guice.ext.jsr250;
 
 import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.injection.MBinder;
@@ -46,13 +47,14 @@ import static org.junit.Assert.*;
 public class Jsr250Test {
 
     @Test
-    public void test_resource() throws Exception {
-        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule()).getInstance(ResClass.class);
-        assertEquals(2, ResClass.verified);
+    public void test_resource_with_type() throws Exception {
+        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule()).getInstance(Res1Class.class);
+        assertEquals(2, Res1Class.verified);
     }
 
-    static class ResClass {
+    static class Res1Class {
         static int verified;
+
         @Resource
         Injector injector;
 
@@ -75,6 +77,30 @@ public class Jsr250Test {
             assertSame(injector, provider.get());
             verified++;
         }
+    }
+
+    @Test
+    public void test_resource_with_name() throws Exception {
+        final AA aa1 = new AA();
+        final AA aa2 = new AA();
+        Res2Class res2 = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(AA.class).annotatedWith(Names.named("aa1")).toInstance(aa1);
+                bind(AA.class).annotatedWith(Names.named("aa2")).toInstance(aa2);
+            }
+        }).getInstance(Res2Class.class);
+        assertEquals(aa1, res2.aa1);
+        assertEquals(aa2, res2.aa2);
+        assertTrue(res2.aa1 != res2.aa2);
+    }
+
+    static class Res2Class {
+        @Resource
+        AA aa1;
+
+        @Resource
+        AA aa2;
     }
 
     @Test
