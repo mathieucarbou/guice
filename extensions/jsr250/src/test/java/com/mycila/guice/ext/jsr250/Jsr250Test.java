@@ -81,32 +81,26 @@ public class Jsr250Test {
 
     @Test
     public void test_resource_with_name() throws Exception {
-        Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
+        final AA aa1 = new AA();
+        final AA aa2 = new AA();
+        Res2Class res2 = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
             @Override
             protected void configure() {
-                bind(AA.class).annotatedWith(Names.named("aa1")).toInstance(new AA());
-                bind(AA.class).annotatedWith(Names.named("aa2")).toInstance(new AA());
+                bind(AA.class).annotatedWith(Names.named("aa1")).toInstance(aa1);
+                bind(AA.class).annotatedWith(Names.named("aa2")).toInstance(aa2);
             }
         }).getInstance(Res2Class.class);
-        assertEquals(1, Res2Class.verified);
+        assertEquals(aa1, res2.aa1);
+        assertEquals(aa2, res2.aa2);
+        assertTrue(res2.aa1 != res2.aa2);
     }
 
     static class Res2Class {
-        static int verified;
-
         @Resource
         AA aa1;
 
         @Resource
         AA aa2;
-
-        @PostConstruct
-        void init() {
-            assertNotNull(aa1);
-            assertNotNull(aa2);
-            assertTrue(aa1 != aa2);
-            verified++;
-        }
     }
 
     @Test
