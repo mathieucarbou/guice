@@ -1,3 +1,13 @@
+The following documentation is not up to date. 
+
+Please help if you want to contribute!
+
+__Lastest releases__ (note that it may take up to 1-2 days to be in Maven Central repository):
+
+* [3.6.ga](http://repo1.maven.org/maven2/com/mycila/guice) (2015-01-23) - see [issues and pull requests](https://github.com/mycila/guice/issues?q=milestone%3A3.6)
+
+---------------
+
 **Table of Contents**
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
