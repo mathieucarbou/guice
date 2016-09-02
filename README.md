@@ -1,10 +1,4 @@
-The following documentation is not up to date. 
-
-Please help if you want to contribute!
-
-__Lastest releases__ (note that it may take up to 1-2 days to be in Maven Central repository):
-
-* [3.6.ga](http://repo1.maven.org/maven2/com/mycila/guice) (2015-01-23) - see [issues and pull requests](https://github.com/mycila/guice/issues?q=milestone%3A3.6)
+The following documentation is not up to date. Please help if you want to contribute!
 
 ---------------
 
@@ -27,11 +21,18 @@ __Lastest releases__ (note that it may take up to 1-2 days to be in Maven Centra
 
 This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
 
- - __Issues:__ https://github.com/mycila/guice/issues
  - __OSGi Compliant:__ <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
  - __Build status:__ [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
+ - __Issues:__ https://github.com/mycila/license-maven-plugin/issues
+ - __License:__ [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+ 
+[![](https://badge.waffle.io/mycila/guice.svg?label=ready&title=Ready)](http://waffle.io/mycila/guice)
+[![](https://badge.waffle.io/mycila/guice.svg?label=in-progress&title=In%20Progress)](http://waffle.io/mycila/guice)
+[![](https://badge.waffle.io/mycila/guice.svg?label=under-review&title=Under%20Review)](http://waffle.io/mycila/guice)
 
-__LATEST RELEASE:__ `3.5.ga` (please double-check in Maven Central repo: this website is not always updated)
+__LATEST RELEASE:__
+
+* [3.6.ga](http://repo1.maven.org/maven2/com/mycila/guice) (2015-01-23) - see [issues and pull requests](https://github.com/mycila/guice/issues?q=milestone%3A3.6)
 
 ## Maven Repository ##
 
