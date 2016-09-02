@@ -30,6 +30,11 @@ This project contains a set of Google Guice Extensions useful in every-days deve
 [![](https://badge.waffle.io/mycila/guice.svg?label=in-progress&title=In%20Progress)](http://waffle.io/mycila/guice)
 [![](https://badge.waffle.io/mycila/guice.svg?label=under-review&title=Under%20Review)](http://waffle.io/mycila/guice)
 
+__Contributors__
+
+* [@mgoellnitz](https://github.com/mgoellnitz)
+* [@keeganwitt](https://github.com/keeganwitt)
+
 __LATEST RELEASE:__
 
 * [3.6.ga](http://repo1.maven.org/maven2/com/mycila/guice) (2015-01-23) - see [issues and pull requests](https://github.com/mycila/guice/issues?q=milestone%3A3.6)
