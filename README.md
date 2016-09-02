@@ -355,5 +355,3 @@ If you want to get all extensions at once (but you may end up with more dependen
     </dependency>
 
 Note: the `-all` package depends on the repackaging version of Google Guice Servlet
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/cf77f56baad338e179ef83d90c026635 "githalytics.com")](http://githalytics.com/mycila/guice)
