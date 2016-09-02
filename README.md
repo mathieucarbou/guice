@@ -5,7 +5,6 @@ The following documentation is not up to date. Please help if you want to contri
 **Table of Contents**
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
-	- [Maven Repository](#maven-repository)
 	- [Extensions](#extensions)
 		- [1. Customizes injection annotations](#1-customizes-injection-annotations)
 		- [2. Closeable Injector](#2-closeable-injector)
@@ -39,15 +38,10 @@ __LATEST RELEASE:__
 
 * [3.6.ga](http://repo1.maven.org/maven2/com/mycila/guice) (2015-01-23) - see [issues and pull requests](https://github.com/mycila/guice/issues?q=milestone%3A3.6)
 
-## Maven Repository ##
+__Maven Repository__
 
- - __Releases__ 
-
-Available in Maven Central Repository: http://repo1.maven.org/maven2/com/mycila/guice/extensions/
-
- - __Snapshots__
- 
-Available in OSS Repository:  https://oss.sonatype.org/content/repositories/snapshots/com/mycila/guice/extensions/
+ * __Releases:__ http://repo1.maven.org/maven2/com/mycila/guice/extensions/
+ * __Snapshots:__ https://oss.sonatype.org/content/repositories/snapshots/com/mycila/guice/extensions/
 
 ## Extensions ##
 
