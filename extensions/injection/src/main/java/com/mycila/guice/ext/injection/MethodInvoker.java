@@ -21,7 +21,6 @@ import com.google.common.cache.LoadingCache;
 import com.google.inject.internal.BytecodeGen;
 import com.google.inject.internal.cglib.core.$CodeGenerationException;
 import com.google.inject.internal.cglib.reflect.$FastMethod;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.concurrent.ExecutionException;
@@ -39,7 +38,7 @@ public class MethodInvoker implements Member, AnnotatedElement {
                 int modifiers = method.getModifiers();
                 if (!Modifier.isPrivate(modifiers) && !Modifier.isProtected(modifiers)) {
                     try {
-                        final $FastMethod fastMethod = BytecodeGen.newFastClass(method.getDeclaringClass(), BytecodeGen.Visibility.forMember(method)).getMethod(method);
+                        final $FastMethod fastMethod = BytecodeGen.newFastClassForMember(method.getDeclaringClass(), method).getMethod(method);
                         return new MethodInvoker(method) {
                             @Override
                             public Object invoke(Object target, Object... parameters) {

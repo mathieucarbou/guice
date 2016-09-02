@@ -21,14 +21,15 @@ import com.google.inject.binder.AnnotatedConstantBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.matcher.Matcher;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.spi.Dependency;
 import com.google.inject.spi.Message;
+import com.google.inject.spi.ModuleAnnotatedMethodScanner;
 import com.google.inject.spi.ProvisionListener;
 import com.google.inject.spi.TypeConverter;
 import com.google.inject.spi.TypeListener;
-import org.aopalliance.intercept.MethodInterceptor;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import org.aopalliance.intercept.MethodInterceptor;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -210,4 +211,15 @@ public class MBinder implements Binder {
     public void requireExactBindingAnnotations() {
         binder.requireExactBindingAnnotations();
     }
+
+    @Override
+    public <T> Provider<T> getProvider(Dependency<T> dpndnc) {
+        return binder.getProvider(dpndnc);
+    }
+
+    @Override
+    public void scanModulesForAnnotatedMethods(ModuleAnnotatedMethodScanner mams) {
+        binder.scanModulesForAnnotatedMethods(mams);
+    }
+
 }
