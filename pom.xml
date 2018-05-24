@@ -100,20 +100,14 @@
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.0</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.sonatype.sisu</groupId>
                         <artifactId>sisu-guava</artifactId>
                     </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>19.0</version>
-                <exclusions>
                     <exclusion>
+                        <!-- This is transitive from com.google.guava:guava -->
                         <groupId>com.google.code.findbugs</groupId>
                         <artifactId>jsr305</artifactId>
                     </exclusion>
