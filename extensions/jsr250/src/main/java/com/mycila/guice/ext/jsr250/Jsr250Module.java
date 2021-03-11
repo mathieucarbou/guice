@@ -96,7 +96,7 @@ public class Jsr250Module extends AbstractModule {
                 }
                 try {
                     if (binding instanceof ProviderInstanceBinding<?>) {
-                        Object o = ((ProviderInstanceBinding) binding).getProviderInstance();
+                        Object o = ((ProviderInstanceBinding) binding).getUserSuppliedProvider();
                         if (!done.containsKey(o)) {
                             preDestroy(o);
                             done.put(o, Void.TYPE);
