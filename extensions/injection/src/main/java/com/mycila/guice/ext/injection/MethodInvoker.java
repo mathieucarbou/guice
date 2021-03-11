@@ -18,9 +18,6 @@ package com.mycila.guice.ext.injection;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.inject.internal.BytecodeGen;
-import com.google.inject.internal.cglib.core.$CodeGenerationException;
-import com.google.inject.internal.cglib.reflect.$FastMethod;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.concurrent.ExecutionException;
@@ -36,21 +33,6 @@ public class MethodInvoker implements Member, AnnotatedElement {
             @Override
             public MethodInvoker load(final Method method) throws Exception {
                 int modifiers = method.getModifiers();
-                if (!Modifier.isPrivate(modifiers) && !Modifier.isProtected(modifiers)) {
-                    try {
-                        final $FastMethod fastMethod = BytecodeGen.newFastClassForMember(method.getDeclaringClass(), method).getMethod(method);
-                        return new MethodInvoker(method) {
-                            @Override
-                            public Object invoke(Object target, Object... parameters) {
-                                try {
-                                    return fastMethod.invoke(target, parameters);
-                                } catch (InvocationTargetException e) {
-                                    throw MycilaGuiceException.toRuntime(e);
-                                }
-                            }
-                        };
-                    } catch ($CodeGenerationException e) {/* fall-through */}
-                }
                 if (!Modifier.isPublic(modifiers) || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
                     method.setAccessible(true);
                 }
