@@ -18,7 +18,7 @@ package com.mycila.guice.ext.closeable;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Stage;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
