@@ -16,6 +16,8 @@
 package com.mycila.guice.ext.closeable;
 
 import com.google.inject.*;
+import com.google.inject.spi.Element;
+import com.google.inject.spi.InjectionPoint;
 import com.google.inject.spi.TypeConverterBinding;
 
 import java.lang.annotation.Annotation;
@@ -144,6 +146,16 @@ final class MycilaCloseableInjector implements CloseableInjector {
     @Override
     public Set<TypeConverterBinding> getTypeConverterBindings() {
         return injector().getTypeConverterBindings();
+    }
+
+    @Override
+    public List<Element> getElements() {
+        return injector().getElements();
+    }
+
+    @Override
+    public Map<TypeLiteral<?>, List<InjectionPoint>> getAllMembersInjectorInjectionPoints() {
+        return injector().getAllMembersInjectorInjectionPoints();
     }
 
 }
