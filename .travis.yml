@@ -5,8 +5,8 @@ script: mvn clean install --quiet -B
 install: /bin/true
 
 jdk:
-  - openjdk7
-  - oraclejdk7
+  - openjdk8
+  - oraclejdk8
 
 branches:
   only:
