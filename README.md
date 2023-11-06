@@ -21,8 +21,6 @@ The following documentation is not up to date. Please help if you want to contri
 This project contains a set of Google Guice Extensions useful in every-days development with [Google Guice](https://code.google.com/p/google-guice/).
 
  - __OSGi Compliant:__ <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
- - __Build status:__ [![Build Status](https://travis-ci.org/mycila/guice.png?branch=master)](https://travis-ci.org/mycila/guice)
- - __Issues:__ https://github.com/mycila/license-maven-plugin/issues
  - __License:__ [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
  
 [![](https://badge.waffle.io/mycila/guice.svg?label=ready&title=Ready)](http://waffle.io/mycila/guice)
