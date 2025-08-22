@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.internal.UniqueAnnotations;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

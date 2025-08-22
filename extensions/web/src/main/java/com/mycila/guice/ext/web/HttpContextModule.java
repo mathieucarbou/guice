@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +20,9 @@ import com.google.inject.Provides;
 import com.google.inject.servlet.RequestParameters;
 import com.mycila.guice.ext.service.OverrideModule;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
 /**

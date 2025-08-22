@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,8 @@
  */
 package com.mycila.guice.ext.groovy;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

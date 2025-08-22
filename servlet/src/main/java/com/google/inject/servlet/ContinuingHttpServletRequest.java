@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,11 +18,11 @@ package com.google.inject.servlet;
 import com.google.common.collect.Maps;
 import com.google.inject.OutOfScopeException;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +20,10 @@ import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.mycila.guice.ext.injection.KeyProviderSkeleton;
+import jakarta.annotation.Resource;
+import jakarta.inject.Inject;
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
+
 import java.lang.reflect.Field;
 
 /**
@@ -30,7 +31,8 @@ import java.lang.reflect.Field;
  */
 class Jsr250KeyProvider extends KeyProviderSkeleton<Resource> {
 
-    @Inject Injector injector;
+    @Inject
+    Injector injector;
 
     @Override
     public Key<?> getKey(TypeLiteral<?> injectedType, Field injectedMember, Resource resourceAnnotation) {

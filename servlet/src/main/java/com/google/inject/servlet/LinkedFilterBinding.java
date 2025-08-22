@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@ package com.google.inject.servlet;
 
 import com.google.inject.Key;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 
 /**
  * A linked binding to a filter.

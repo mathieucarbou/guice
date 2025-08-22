@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,15 @@ package com.mycila.guice.ext.jsr250;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.google.inject.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Binding;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Scope;
+import com.google.inject.Scopes;
+import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
 import com.google.inject.spi.Dependency;
 import com.google.inject.spi.HasDependencies;
 import com.google.inject.spi.ProviderInstanceBinding;
@@ -27,12 +35,15 @@ import com.mycila.guice.ext.closeable.InjectorCloseListener;
 import com.mycila.guice.ext.injection.MBinder;
 import com.mycila.guice.ext.injection.MethodHandler;
 import com.mycila.guice.ext.injection.Reflect;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
@@ -64,10 +75,10 @@ public class Jsr250Module extends AbstractModule {
         @Override
         public void onInjectorClosing() {
             Map<Key<?>, Binding<?>> bindings = injector.getAllBindings();
-            Multimap<Binding<?>, Binding<?>> dependants = Multimaps.newSetMultimap(new IdentityHashMap<Binding<?>, Collection<Binding<?>>>(), new Supplier<Set<Binding<?>>>() {
+            Multimap<Binding<?>, Binding<?>> dependants = Multimaps.newSetMultimap(new IdentityHashMap<>(), new Supplier<Set<Binding<?>>>() {
                 @Override
                 public Set<Binding<?>> get() {
-                    return new HashSet<Binding<?>>();
+                    return new HashSet<>();
                 }
             });
             for (Binding<?> binding : bindings.values()) {

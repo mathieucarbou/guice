@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,16 @@
  */
 package com.mycila.guice.ext.closeable;
 
-import com.google.inject.*;
+import com.google.inject.Binding;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.MembersInjector;
+import com.google.inject.Module;
+import com.google.inject.Provider;
+import com.google.inject.Scope;
+import com.google.inject.Scopes;
+import com.google.inject.TypeLiteral;
 import com.google.inject.spi.Element;
 import com.google.inject.spi.InjectionPoint;
 import com.google.inject.spi.TypeConverterBinding;

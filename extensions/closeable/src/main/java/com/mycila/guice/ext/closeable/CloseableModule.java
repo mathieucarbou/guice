@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@ package com.mycila.guice.ext.closeable;
 
 import com.google.inject.AbstractModule;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)

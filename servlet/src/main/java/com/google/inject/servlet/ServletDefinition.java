@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +22,23 @@ import com.google.inject.Scopes;
 import com.google.inject.spi.BindingTargetVisitor;
 import com.google.inject.spi.ProviderInstanceBinding;
 import com.google.inject.spi.ProviderWithExtensionVisitor;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
-import java.util.*;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.inject.servlet.ManagedServletPipeline.REQUEST_DISPATCHER_REQUEST;
@@ -233,6 +243,15 @@ class ServletDefinition implements ProviderWithExtensionVisitor<ServletDefinitio
                 final String info = getPathInfo();
 
                 return (null == info) ? null : getRealPath(info);
+            }
+
+            private String getRealPath(String info) {
+                try {
+                    URL resourceUrl = servletRequest.getServletContext().getResource(info);
+                    return resourceUrl != null ? Paths.get(resourceUrl.toURI()).toString() : null;
+                } catch (Exception e) {
+                    return null;
+                }
             }
 
             // Memoizer pattern.

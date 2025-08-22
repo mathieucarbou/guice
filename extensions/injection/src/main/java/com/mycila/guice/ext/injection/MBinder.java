@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,16 @@
  */
 package com.mycila.guice.ext.injection;
 
-import com.google.inject.*;
+import com.google.inject.Binder;
+import com.google.inject.Binding;
+import com.google.inject.Key;
+import com.google.inject.MembersInjector;
+import com.google.inject.Module;
+import com.google.inject.PrivateBinder;
+import com.google.inject.Provider;
+import com.google.inject.Scope;
+import com.google.inject.Stage;
+import com.google.inject.TypeLiteral;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.AnnotatedConstantBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
@@ -27,9 +36,10 @@ import com.google.inject.spi.ModuleAnnotatedMethodScanner;
 import com.google.inject.spi.ProvisionListener;
 import com.google.inject.spi.TypeConverter;
 import com.google.inject.spi.TypeListener;
+import org.aopalliance.intercept.MethodInterceptor;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import org.aopalliance.intercept.MethodInterceptor;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
