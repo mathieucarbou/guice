@@ -13,20 +13,20 @@ branches:
   only:
     - master
 
-# Install OpenJDK 8 and Maven on Linux (Ubuntu - Xenial)
+# Install OpenJDK 17 and Maven on Linux (Ubuntu - Xenial)
 addons:
   apt:
     packages:
-      - openjdk-8-jdk
+      - openjdk-17-jdk
       - maven
 
-# Install OpenJDK 8 (Zulu) and Maven on Windows
+# Install OpenJDK 17 (Zulu) and Maven on Windows
 before_install:
   - |
     if [ "${TRAVIS_OS_NAME}" == windows ]; then
-      choco install -y zulu8
+      choco install -y zulu17
       choco install -y maven
-      export PATH=/C/Program\ Files/Zulu/zulu-8/bin:/C/ProgramData/chocolatey/lib/maven/apache-maven-3.6.3/bin:$PATH
+      export PATH=/C/Program\ Files/Zulu/zulu-17/bin:/C/ProgramData/chocolatey/lib/maven/apache-maven-3.6.3/bin:$PATH
       echo "PATH=${PATH}"
     fi
 
