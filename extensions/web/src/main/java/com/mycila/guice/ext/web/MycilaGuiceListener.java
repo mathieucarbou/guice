@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ import com.google.inject.util.Modules;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.service.ServiceModule;
 
-import javax.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextEvent;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)

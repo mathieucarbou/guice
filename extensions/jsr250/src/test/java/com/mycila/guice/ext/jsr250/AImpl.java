@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +15,9 @@
  */
 package com.mycila.guice.ext.jsr250;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 public class AImpl implements A {
     //@Inject

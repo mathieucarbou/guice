@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +15,9 @@
  */
 package com.mycila.guice.ext.jsr250;
 
-import javax.annotation.Resource;
-import javax.inject.Named;
-import javax.inject.Provider;
+import jakarta.annotation.Resource;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)

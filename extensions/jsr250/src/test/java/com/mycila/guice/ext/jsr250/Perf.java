@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import com.mycila.guice.ext.closeable.CloseableModule;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)

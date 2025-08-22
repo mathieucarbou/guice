@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@ import com.mycila.guice.ext.injection.MethodHandler;
 import com.mycila.guice.ext.injection.MethodInvoker;
 import com.mycila.guice.ext.injection.Reflect;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;

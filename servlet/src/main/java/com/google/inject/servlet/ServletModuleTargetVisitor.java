@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,8 +19,8 @@ import com.google.inject.servlet.ServletModule.FilterKeyBindingBuilder;
 import com.google.inject.servlet.ServletModule.ServletKeyBindingBuilder;
 import com.google.inject.spi.BindingTargetVisitor;
 
-import javax.servlet.Filter;
-import javax.servlet.http.HttpServlet;
+import jakarta.servlet.Filter;
+import jakarta.servlet.http.HttpServlet;
 
 /**
  * A visitor for the servlet extension.

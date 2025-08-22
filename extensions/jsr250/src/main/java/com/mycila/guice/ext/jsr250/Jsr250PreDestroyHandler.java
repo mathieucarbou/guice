@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +18,8 @@ package com.mycila.guice.ext.jsr250;
 import com.google.inject.TypeLiteral;
 import com.mycila.guice.ext.injection.MethodHandler;
 import com.mycila.guice.ext.injection.MethodInvoker;
+import jakarta.annotation.PreDestroy;
 
-import javax.annotation.PreDestroy;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 

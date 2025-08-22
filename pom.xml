@@ -28,7 +28,7 @@
 
     <groupId>com.mycila.guice</groupId>
     <artifactId>mycila-guice</artifactId>
-    <version>5.1-SNAPSHOT</version>
+    <version>6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Mycila Guice</name>
@@ -37,7 +37,7 @@
     <description>Google Guice Extensions</description>
 
     <properties>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>17</jdk.version>
         <mycila.github.name>guice</mycila.github.name>
     </properties>
 
@@ -101,7 +101,7 @@
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
-                <version>5.0.1</version>
+                <version>7.0.0</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.sonatype.sisu</groupId>
@@ -112,7 +112,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>30.1-jre</version>
+                <version>33.4.8-jre</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.google.code.findbugs</groupId>
@@ -123,12 +123,17 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>4.13.2</version>
             </dependency>
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>6.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>3.0.0</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
@@ -180,7 +185,7 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>5.0.0</version>
                 <configuration>
                     <header>com/mycila/licenses/APACHE-2</header>
                     <properties>
