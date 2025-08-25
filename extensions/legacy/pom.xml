@@ -1,12 +1,12 @@
 <!--
 
-    Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
+    Copyright (C) 2010-2025 Mycila (mathieu.carbou@gmail.com)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
+    Licensed under the Apache License, Version 2.0 (the "License").
+    You may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+            https://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,6 +30,20 @@
     <name>Mycila Guice :: Extensions :: Legacy</name>
     <packaging>jar</packaging>
 
+    <scm>
+        <connection>scm:git:https://github.com/mathieucarbou/guice.git</connection>
+        <developerConnection>scm:git:git@github.com:mathieucarbou/guice.git</developerConnection>
+        <url>https://github.com/mathieucarbou/guice</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>report</id>
+            <url>https://mathieu.carbou.me/guice/reports/${project.version}/extensions/${project.artifactId}</url>
+        </site>
+    </distributionManagement>
+
     <properties>
         <osgi.export>!com.mycila.internal*,com.mycila.guice.ext.legacy*;version="${project.version}";-noimport:=true</osgi.export>
     </properties>
@@ -46,5 +60,19 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>report</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <reporting>
+                <outputDirectory>../../docs/reports/${project.version}/extensions/${project.artifactId}</outputDirectory>
+            </reporting>
+        </profile>
+    </profiles>
 
 </project>

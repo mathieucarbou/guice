@@ -1,12 +1,12 @@
 <!--
 
-    Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
+    Copyright (C) 2010-2025 Mycila (mathieu.carbou@gmail.com)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
+    Licensed under the Apache License, Version 2.0 (the "License").
+    You may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+            https://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,16 +15,11 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.mycila</groupId>
-        <artifactId>mycila-pom</artifactId>
-        <version>9</version>
-        <relativePath>../pom</relativePath>
-    </parent>
 
     <groupId>com.mycila.guice</groupId>
     <artifactId>mycila-guice</artifactId>
@@ -33,20 +28,55 @@
 
     <name>Mycila Guice</name>
     <inceptionYear>2010</inceptionYear>
-    <url>http://mycila.github.io/${mycila.github.name}</url>
-    <description>Google Guice Extensions</description>
+    <url>https://mathieu.carbou.me/guice</url>
+    <description>Mycila Google Guice Extensions</description>
 
-    <properties>
-        <jdk.version>17</jdk.version>
-        <mycila.github.name>guice</mycila.github.name>
-    </properties>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/mathieucarbou/guice/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>GitHub</system>
+        <url>https://github.com/mathieucarbou/guice/actions</url>
+    </ciManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/mycila/${mycila.github.name}.git</connection>
-        <developerConnection>scm:git:git@github.com:mycila/${mycila.github.name}.git</developerConnection>
-        <url>http://github.com/mycila/${mycila.github.name}</url>
+        <connection>scm:git:https://github.com/mathieucarbou/guice.git</connection>
+        <developerConnection>scm:git:git@github.com:mathieucarbou/guice.git</developerConnection>
+        <url>https://github.com/mathieucarbou/guice</url>
         <tag>HEAD</tag>
     </scm>
+
+    <properties>
+        <!-- Get method parameter names via reflection -->
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+
+        <!-- Maven compiler options -->
+        <java.version>17</java.version>
+        <java.release.version>17</java.release.version>
+        <java.test.version>${java.version}</java.test.version>
+        <java.test.release.version>${java.release.version}</java.test.release.version>
+
+        <!-- Legacy compiler options source/target not really needed now (but still used by things
+        like sonar, m2e) -->
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.testSource>${java.test.version}</maven.compiler.testSource>
+        <maven.compiler.testTarget>${java.test.version}</maven.compiler.testTarget>
+
+        <maven.compiler.release>${java.release.version}</maven.compiler.release>
+        <maven.compiler.testRelease>${java.test.release.version}</maven.compiler.testRelease>
+
+        <!-- Project Encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven-plugin.version>3.15.1</maven-plugin.version>
+        <surefire.version>3.5.3</surefire.version>
+        <license-maven-plugin.version>5.0.0</license-maven-plugin.version>
+    </properties>
 
     <modules>
         <module>servlet</module>
@@ -153,7 +183,331 @@
         </dependencies>
     </dependencyManagement>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-report-plugin</artifactId>
+                <version>${maven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <repository>
+            <id>mycila-oss-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mycila-oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+        <site>
+            <id>report</id>
+            <url>https://mathieu.carbou.me/guice/reports/${project.version}</url>
+        </site>
+    </distributionManagement>
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <configuration>
+                        <force>true</force>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.6.1</version>
+                    <configuration>
+                        <rules>
+                            <enforceBytecodeVersion>
+                                <maxJdkVersion>${java.version}</maxJdkVersion>
+                                <ignoredScopes>provided,test</ignoredScopes>
+                            </enforceBytecodeVersion>
+                            <requireMavenVersion>
+                                <version>3.9.10</version>
+                                <message>Require maven 3.9.10</message>
+                            </requireMavenVersion>
+                        </rules>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>extra-enforcer-rules</artifactId>
+                            <version>1.10.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.11.2</version>
+                    <configuration>
+                        <!-- TODO: fix javadoc warnings -->
+                        <failOnError>false</failOnError>
+                        <additionalOptions>
+                            <additionalOption>-html5</additionalOption>
+                        </additionalOptions>
+                        <legacyMode>true</legacyMode>
+                        <notimestamp>true</notimestamp>
+                        <release>${java.release.version}</release>
+                        <source>${java.version}</source>
+                        <quiet>true</quiet>
+                        <links>
+                            <link>https://docs.oracle.com/en/java/javase/17/docs/api/</link>
+                        </links>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                    <configuration>
+                        <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <version>3.9.1</version>
+                    <configuration>
+                        <streamLogsOnFailures>true</streamLogsOnFailures>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.groovy</groupId>
+                            <artifactId>groovy</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.groovy</groupId>
+                            <artifactId>groovy-json</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.groovy</groupId>
+                            <artifactId>groovy-nio</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.groovy</groupId>
+                            <artifactId>groovy-xml</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.21.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.2.8</version>
+                    <configuration>
+                        <keyname>${gpg.keyname}</keyname>
+                        <passphrase>${gpg.passphrase}</passphrase>
+                        <useAgent>false</useAgent>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>${maven-plugin.version}</version>
+                    <configuration>
+                        <detail>true</detail>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <configLocation>.config/checkstyle.xml</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <!-- TODO: fix checkstyle warnings  -->
+                        <failOnViolation>false</failOnViolation>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>10.26.1</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${license-maven-plugin.version}</version>
+                    <configuration>
+                        <licenseSets>
+                            <licenseSet>
+                                <inlineHeader>
+                  <![CDATA[
+Copyright (C) ${license.git.copyrightYears} Mycila (mathieu.carbou@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+        https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+]]>
+                                </inlineHeader>
+                                <excludes>
+                                    <exclude>src/test/resources/**</exclude>
+                                    <exclude>docs/**</exclude>
+                                    <exclude>.config/**</exclude>
+                                </excludes>
+                            </licenseSet>
+                        </licenseSets>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.mycila</groupId>
+                            <artifactId>license-maven-plugin-git</artifactId>
+                            <!-- make sure you use the same version as license-maven-plugin -->
+                            <version>${license-maven-plugin.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.1.1</version>
+                    <configuration>
+                        <arguments>-Daether.checksums.algorithms=SHA-512,SHA-256,SHA-1,MD5</arguments>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <releaseProfiles>release</releaseProfiles>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>2.1.0</version>
+                    <configuration>
+                        <tag>${project.artifactId}-${project.version}</tag>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.14.0</version>
+                    <configuration>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy-eclipse-compiler</artifactId>
+                            <version>3.7.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy-eclipse-batch</artifactId>
+                            <version>3.0.8-01</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>5.1.1</version>
+                    <extensions>true</extensions>
+                    <executions>
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>manifest</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <instructions>
+                            <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                            <Bundle-Name>${project.name}</Bundle-Name>
+                            <Bundle-Description>${project.description}</Bundle-Description>
+                            <Bundle-Version>${project.version}</Bundle-Version>
+                            <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
+                            <Bundle-DocURL>${project.url}</Bundle-DocURL>
+                            <Bundle-Copyright>Copyright (C) ${project.inceptionYear}
+                                ${project.organization.name}</Bundle-Copyright>
+                            <Private-Package>${osgi.private}</Private-Package>
+                            <Export-Package>${osgi.export}</Export-Package>
+                            <Import-Package>${osgi.import}</Import-Package>
+                            <_versionpolicy>[${version;===;${@}},${version;+;${@}})</_versionpolicy>
+                            <_removeheaders>
+                                Built-By,Tool,Created-By,
+                                Include-Resource,Private-Package,
+                                Ignore-Package,Bnd-LastModified
+                            </_removeheaders>
+                        </instructions>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -169,44 +523,139 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.11.2</version>
-                <configuration>
-                    <tag>${project.artifactId}-${project.version}</tag>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>5.0.0</version>
-                <configuration>
-                    <header>com/mycila/licenses/APACHE-2</header>
-                    <properties>
-                        <owner>Mycila</owner>
-                        <year>${project.inceptionYear}</year>
-                        <email>mathieu.carbou@gmail.com</email>
-                    </properties>
-                    <excludes>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>**/release-pom.xml</exclude>
-                    </excludes>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.mycila</groupId>
-                        <artifactId>licenses</artifactId>
-                        <version>1</version>
-                    </dependency>
-                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>enforce-clean</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>pre-clean</phase>
+                    </execution>
+                    <execution>
+                        <id>enforce-site</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>pre-site</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>report</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <reporting>
+                <outputDirectory>docs/reports/${project.version}</outputDirectory>
+            </reporting>
+        </profile>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <reporting>
+                <outputDirectory>docs/reports/${project.version}</outputDirectory>
+            </reporting>
+            <build>
+                <plugins>
+                    <!-- Skip license plugin during release as maven release is now shallow cloned -->
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.21.0</version>
+                        <configuration>
+                            <skipDeploy>true</skipDeploy>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
