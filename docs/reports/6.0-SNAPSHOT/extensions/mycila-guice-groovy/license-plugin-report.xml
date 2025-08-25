@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="CHECK" timestamp="1756116308858">
+    <module artifactId="mycila-guice-groovy" groupId="com.mycila.guice.extensions" version="6.0-SNAPSHOT"/>
+    <files>
+        <file path="pom.xml" result="PRESENT"/>
+        <file path="src/main/groovy/com/mycila/guice/ext/groovy/ExpandHandler.groovy" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/groovy/Expand.java" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/groovy/ExpandModule.java" result="PRESENT"/>
+    </files>
+</licensePluginReport>

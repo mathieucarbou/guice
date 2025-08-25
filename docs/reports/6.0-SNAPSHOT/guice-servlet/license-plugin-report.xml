@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="CHECK" timestamp="1756116298578">
+    <module artifactId="guice-servlet" groupId="com.mycila.guice" version="6.0-SNAPSHOT"/>
+    <files>
+        <file path="pom.xml" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/AbstractServletModuleBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ContinuingHttpServletRequest.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/DefaultFilterPipeline.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/FilterChainInvocation.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/FilterDefinition.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/FilterPipeline.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/FiltersModuleBuilder.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/GuiceFilter.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/GuiceServletContextListener.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/InstanceFilterBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/InstanceFilterBindingImpl.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/InstanceServletBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/InstanceServletBindingImpl.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/InternalServletModule.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/LinkedFilterBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/LinkedFilterBindingImpl.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/LinkedServletBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/LinkedServletBindingImpl.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ManagedFilterPipeline.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ManagedServletPipeline.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/RequestParameters.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/RequestScoped.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletDefinition.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletModule.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletModuleBinding.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletModuleTargetVisitor.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletScopes.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ServletsModuleBuilder.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/SessionScoped.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/ToStringBuilder.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/UriPatternMatcher.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/UriPatternType.java" result="PRESENT"/>
+        <file path="src/main/java/com/google/inject/servlet/package-info.java" result="PRESENT"/>
+    </files>
+</licensePluginReport>
