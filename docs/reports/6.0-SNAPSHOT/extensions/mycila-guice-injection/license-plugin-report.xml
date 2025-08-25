@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1756116305415">
+<licensePluginReport goal="CHECK" timestamp="1756120262716">
     <module artifactId="mycila-guice-injection" groupId="com.mycila.guice.extensions" version="6.0-SNAPSHOT"/>
     <files>
         <file path="pom.xml" result="PRESENT"/>
