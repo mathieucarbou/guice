@@ -1,12 +1,12 @@
 <!--
 
-    Copyright (C) 2010 Mycila (mathieu.carbou@gmail.com)
+    Copyright (C) 2010-2025 Mycila (mathieu.carbou@gmail.com)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
+    Licensed under the Apache License, Version 2.0 (the "License").
+    You may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+            https://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,9 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -29,6 +31,20 @@
     <artifactId>mycila-guice-all</artifactId>
     <name>Mycila Guice :: All</name>
     <packaging>jar</packaging>
+
+    <scm>
+        <connection>scm:git:https://github.com/mathieucarbou/guice.git</connection>
+        <developerConnection>scm:git:git@github.com:mathieucarbou/guice.git</developerConnection>
+        <url>https://github.com/mathieucarbou/guice</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>report</id>
+            <url>https://mathieu.carbou.me/guice/reports/${project.version}/${project.artifactId}</url>
+        </site>
+    </distributionManagement>
 
     <properties>
         <osgi.export>
@@ -57,7 +73,8 @@
                         </includes>
                     </artifactSet>
                     <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                        <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                     </transformers>
                 </configuration>
             </plugin>
@@ -94,5 +111,19 @@
             <artifactId>mycila-guice-web</artifactId>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>report</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <reporting>
+                <outputDirectory>../docs/reports/${project.version}/${project.artifactId}</outputDirectory>
+            </reporting>
+        </profile>
+    </profiles>
 
 </project>
