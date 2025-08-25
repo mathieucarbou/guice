@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1756120548371">
-    <module artifactId="mycila-guice-legacy" groupId="com.mycila.guice.extensions" version="6.0-SNAPSHOT"/>
-    <files>
-        <file path="pom.xml" result="PRESENT"/>
-        <file path="src/main/java/com/mycila/guice/ext/legacy/LegacyProvider.java" result="PRESENT"/>
-        <file path="src/test/java/com/mycila/guice/ext/legacy/LegacyProviderTest.java" result="PRESENT"/>
-    </files>
-</licensePluginReport>

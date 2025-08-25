@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="CHECK" timestamp="1756121038673">
+    <module artifactId="mycila-guice-closeable" groupId="com.mycila.guice.extensions" version="6.0"/>
+    <files>
+        <file path="pom.xml" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/closeable/CloseableInjector.java" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/closeable/CloseableModule.java" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/closeable/InjectorCloseListener.java" result="PRESENT"/>
+        <file path="src/main/java/com/mycila/guice/ext/closeable/MycilaCloseableInjector.java" result="PRESENT"/>
+        <file path="src/test/java/com/mycila/guice/ext/closeable/CloseableTestTest.java" result="PRESENT"/>
+    </files>
+</licensePluginReport>

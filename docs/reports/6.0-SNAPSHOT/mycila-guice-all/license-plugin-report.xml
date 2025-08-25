@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1756120552497">
-    <module artifactId="mycila-guice-all" groupId="com.mycila.guice" version="6.0-SNAPSHOT"/>
-    <files>
-        <file path="pom.xml" result="PRESENT"/>
-        <file path="src/main/java/com/mycila/guice/all/DummyClassForJavaDoc.java" result="PRESENT"/>
-    </files>
-</licensePluginReport>
