@@ -1,0 +1,7 @@
+# bundle exec jekyll serve --host=0.0.0.0
+
+title: Mycila Guice
+description: Mycila Google Guice Extensions
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme

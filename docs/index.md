@@ -7,16 +7,16 @@ The following documentation is not up to date. Please help if you want to contri
 **Table of Contents**
 
 - [Mycila Guice Extensions](#mycila-guice-extensions)
-	- [Extensions](#extensions)
-		- [1. Customizes injection annotations](#1-customizes-injection-annotations)
-		- [2. Closeable Injector](#2-closeable-injector)
-		- [3. JSR-250](#3-jsr-250)
-		- [4. Legacy and Factory Binder](#4-legacy-and-factory-binder)
-		- [5. Service and Module discovery](#5-service-and-module-discovery)
-		- [6. Web Extensions](#6-web-extensions)
-		- [7. Groovy Extensions](#7-groovy-extensions)
-		- [8. Servlet Extension](#8-servlet-extension)
-	- [Get everything in one package](#get-everything-in-one-package)
+  - [Extensions](#extensions)
+    - [1. Customizes injection annotations](#1-customizes-injection-annotations)
+    - [2. Closeable Injector](#2-closeable-injector)
+    - [3. JSR-250](#3-jsr-250)
+    - [4. Legacy and Factory Binder](#4-legacy-and-factory-binder)
+    - [5. Service and Module discovery](#5-service-and-module-discovery)
+    - [6. Web Extensions](#6-web-extensions)
+    - [7. Groovy Extensions](#7-groovy-extensions)
+    - [8. Servlet Extension](#8-servlet-extension)
+  - [Get everything in one package](#get-everything-in-one-package)
 
 # Mycila Guice Extensions #
 
