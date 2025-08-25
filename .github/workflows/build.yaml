@@ -40,4 +40,4 @@ jobs:
 
       - name: 'Build with Maven'
         if: runner.os == 'Windows'
-        run: ./mvn.cmd clean install -V -B -D "maven.artifact.threads=64" -D "org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+        run: ./mvnw.cmd clean install -V -B -D "maven.artifact.threads=64" -D "org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
