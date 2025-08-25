@@ -26,22 +26,6 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
           cache: 'maven'
-
-      - name: 'Check if Maven is installed, install if missing'
-        shell: bash
-        run: |
-          if ! command -v mvn &> /dev/null
-          then
-            echo "Maven not found. Installing Maven..."
-            MAVEN_VERSION=3.9.6
-            curl -sL https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar xz
-            sudo mv apache-maven-${MAVEN_VERSION} /opt/maven
-            echo "/opt/maven/bin" >> $GITHUB_PATH
-          else
-            echo "Maven is already installed:"
-            mvn -v
-          fi    
-
       - name: 'Clean up SNAPSHOTs before cache'
         run: |
           find ~/.m2/repository/ -name '*SNAPSHOT' | xargs rm -rf || true
@@ -51,4 +35,9 @@ jobs:
         shell: bash
 
       - name: 'Build with Maven'
-        run: mvn clean install -V -B -D "maven.artifact.threads=64" -D "org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+        if: runner.os != 'Windows'
+        run: ./mvnw clean install -V -B -D "maven.artifact.threads=64" -D "org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+
+      - name: 'Build with Maven'
+        if: runner.os == 'Windows'
+        run: .\mvn.cmd clean install -V -B -D "maven.artifact.threads=64" -D "org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
