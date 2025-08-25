@@ -44,6 +44,10 @@ __Maven Repository__
  * __Releases:__ http://repo1.maven.org/maven2/com/mycila/guice/extensions/
  * __Snapshots:__ https://oss.sonatype.org/content/repositories/snapshots/com/mycila/guice/extensions/
 
+__Reports__
+
+- [6.0-SNAPSHOT](https://mathieu.carbou.me/guice/reports/6.0-SNAPSHOT/)
+
 ## Extensions ##
 
 ### 1. Customizes injection annotations ###
