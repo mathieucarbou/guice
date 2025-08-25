@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v4
+
+      - name: 'Set up Maven'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: 'Check if Maven is installed, install if missing'
+        shell: bash
+        run: |
+          if ! command -v mvn &> /dev/null
+          then
+            echo "Maven not found. Installing Maven..."
+            MAVEN_VERSION=3.9.6
+            curl -sL https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar xz
+            sudo mv apache-maven-${MAVEN_VERSION} /opt/maven
+            echo "/opt/maven/bin" >> $GITHUB_PATH
+          else
+            echo "Maven is already installed:"
+            mvn -v
+          fi    
+
+      - name: 'Clean up SNAPSHOTs before cache'
+        run: |
+          find ~/.m2/repository/ -name '*SNAPSHOT' | xargs rm -rf || true
+          if [[ "${{ runner.os }}" == "macOS" ]]; then
+            brew cleanup || true
+          fi
+        shell: bash
+
+      - name: 'Build with Maven'
+        run: mvn clean install -V -B -Dmaven.artifact.threads=64 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
