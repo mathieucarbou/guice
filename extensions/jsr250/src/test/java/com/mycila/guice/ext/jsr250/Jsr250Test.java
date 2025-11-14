@@ -95,6 +95,23 @@ public class Jsr250Test {
         assertTrue(res2.aa1 != res2.aa2);
     }
 
+    static class Res3Class {
+        @Inject
+        @Resource
+        Integer num;
+    }
+
+    @Test
+    public void test_resource_with_name_and_Inject() throws Exception {
+        Res3Class res3 = Guice.createInjector(Stage.PRODUCTION, new Jsr250Module(), new CloseableModule(), new AbstractModule() {
+            @Override
+            protected void configure() {
+                bindConstant().annotatedWith(Names.named("num")).to(12345);
+            }
+        }).getInstance(Res3Class.class);
+        assertEquals(12345L, (long) res3.num);
+    }
+
     static class Res2Class {
         @Resource
         AA aa1;
